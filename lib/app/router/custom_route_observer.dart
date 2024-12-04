@@ -2,7 +2,7 @@
 
 // import 'package:auto_route/auto_route.dart';
 // import 'package:flutter/material.dart';
-// import 'package:flutter_starter/core/utils/logger/logger_utils.dart';
+// import 'package:corp_cab_app/core/utils/logger/logger_utils.dart';
 
 // /// Custom route observer that logs all route changes
 // final class CustomRouteObserver extends AutoRouteObserver {
@@ -83,7 +83,7 @@
 // }
 
 import 'package:flutter/material.dart';
-import 'package:flutter_starter/core/utils/logger/logger_utils.dart';
+import 'package:corp_cab_app/core/utils/logger/logger_utils.dart';
 
 class GoRouterObserver extends NavigatorObserver {
 

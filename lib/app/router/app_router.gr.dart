@@ -10,7 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i2;
 import 'package:flutter/material.dart' as _i4;
-import 'package:flutter_starter/feature/home/view/home_view.dart' as _i1;
+import 'package:corp_cab_app/feature/home/view/home_view.dart' as _i1;
 import 'package:go_router/go_router.dart' as _i3;
 
 /// generated route for

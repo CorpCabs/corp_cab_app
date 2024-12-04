@@ -1,5 +1,5 @@
 // import 'package:auto_route/auto_route.dart';
-// import 'package:flutter_starter/app/router/app_router.gr.dart';
+// import 'package:corp_cab_app/app/router/app_router.gr.dart';
 
 // @AutoRouterConfig(replaceInRouteName: 'View,Route')
 
@@ -19,8 +19,8 @@
 
 // Create keys for `root` & `section` navigator avoiding unnecessary rebuilds
 import 'package:flutter/material.dart';
-import 'package:flutter_starter/app/router/custom_route_observer.dart';
-import 'package:flutter_starter/feature/index.dart';
+import 'package:corp_cab_app/app/router/custom_route_observer.dart';
+import 'package:corp_cab_app/feature/index.dart';
 import 'package:go_router/go_router.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -38,7 +38,8 @@ final router = GoRouter(
       builder: (context, state, navigationShell) {
         // Return the widget that implements the custom shell (e.g a BottomNavigationBar).
         // The [StatefulNavigationShell] is passed to be able to navigate to other branches in a stateful way.
-        return ScaffoldWithNavbar(navigationShell: navigationShell);
+        // return ScaffoldWithNavbar(navigationShell: navigationShell);
+        return ScaffoldWithNavbar();
       },
       branches: [
         // The route branch for the 1º Tab

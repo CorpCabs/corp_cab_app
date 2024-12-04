@@ -10,10 +10,30 @@ class HomePage extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          ElevatedButton(
-            onPressed: () => context.go('/home/feature1'),
-            child: const Text('Feature 1'),
-          ),
+          Padding(padding: const EdgeInsets.all(18.0),
+          child: Container(
+            child: TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                filled: true,
+                hintText: "From"
+              ),
+            ),
+          ),),
+          Padding(padding: const EdgeInsets.all(18.0),
+            child: Container(
+              child: TextField(
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    filled: true,
+                    hintText: "To"
+                ),
+              ),
+            ),)
         ],
       ),
     );

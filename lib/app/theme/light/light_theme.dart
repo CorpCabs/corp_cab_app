@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_starter/app/theme/base/base_theme.dart';
+import 'package:corp_cab_app/app/theme/base/base_theme.dart';
 
 final class LightTheme extends BaseTheme {
   @override

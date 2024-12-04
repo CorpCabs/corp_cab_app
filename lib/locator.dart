@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:flutter_starter/app/environment/app_environment.dart';
-import 'package:flutter_starter/core/clients/network/network_client.dart';
+import 'package:corp_cab_app/app/environment/app_environment.dart';
+import 'package:corp_cab_app/core/clients/network/network_client.dart';
 
 /// [Locator] is responsible for locating and registering all the
 /// services of the application.

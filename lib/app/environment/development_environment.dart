@@ -1,5 +1,5 @@
 import 'package:envied/envied.dart';
-import 'package:flutter_starter/app/environment/app_environment.dart';
+import 'package:corp_cab_app/app/environment/app_environment.dart';
 
 part 'development_environment.g.dart';
 

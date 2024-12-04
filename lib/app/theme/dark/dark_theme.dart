@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_starter/app/theme/base/base_theme.dart';
+import 'package:corp_cab_app/app/theme/base/base_theme.dart';
 
 final class DarkTheme extends BaseTheme {
   @override
@@ -11,16 +11,16 @@ final class DarkTheme extends BaseTheme {
   ColorScheme get _colorScheme {
     return const ColorScheme(
       brightness: Brightness.dark,
-      primary: Color(0xffbb86fc),
-      onPrimary: Color(0xff120e14),
+      primary: Color(0xffFFFFFF),
+      onPrimary: Color(0xff140c0d),
       primaryContainer: Color(0xff6200ee),
       onPrimaryContainer: Color(0xffefdfff),
-      secondary: Color(0xff03dac6),
-      onSecondary: Color(0xff041413),
-      secondaryContainer: Color(0xff003e3e),
+      secondary: Color(0xfffec802),
+      onSecondary: Color(0xff6200ee),
+      secondaryContainer: Color(0xff656cfb),
       onSecondaryContainer: Color(0xffdfe9e9),
-      tertiary: Color(0xff03dac6),
-      onTertiary: Color(0xff041413),
+      tertiary: Color(0xff656cfb),
+      onTertiary: Color(0xff6200ee),
       tertiaryContainer: Color(0xff005047),
       onTertiaryContainer: Color(0xffdfecea),
       error: Color(0xffcf6679),
