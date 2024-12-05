@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:corp_cab_app/app/common/commonTextField.dart';
 import 'package:corp_cab_app/app/providers/cab_booking_provider.dart';
+import 'package:corp_cab_app/app/validators/text_field_validator.dart';
 import 'package:corp_cab_app/core/extensions/context_extensions.dart';
 import 'package:corp_cab_app/core/utils/logger/logger_utils.dart';
-import 'package:corp_cab_app/feature/Home/validators/text_field_validator.dart';
 import 'package:corp_cab_app/feature/ScaffoldWithNavbar/components/vehicleCard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

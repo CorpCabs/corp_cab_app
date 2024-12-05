@@ -35,7 +35,7 @@ class CabBookingProvider with ChangeNotifier {
       'title': 'Luxury',
       'price': '1800₽',
       'imagePath': 'assets/luxury.png',
-      'isSelected': false,
+      'isSelected': true,
     },
     {
       'title': 'Luxury',
