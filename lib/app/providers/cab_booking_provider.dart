@@ -11,6 +11,7 @@ class CabBookingProvider with ChangeNotifier {
   String _selectedCabType = 'Standard';
   final double _fare = 0;
   bool _isLoading = false;
+  bool _isError = false;
   final List<Map<String, dynamic>> _vehicleData = [
     {
       'title': 'Economy',
@@ -51,6 +52,7 @@ class CabBookingProvider with ChangeNotifier {
   double get fare => _fare;
   List<Map<String, dynamic>> get vehicleData => _vehicleData;
   bool get isLoading => _isLoading;
+  bool get isError => _isError;
 
   // Setters
   void setPickupLocation(String location) {
@@ -97,5 +99,15 @@ class CabBookingProvider with ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     }
+  }
+
+  void setLoading(bool value) {
+    _isLoading = value;
+    notifyListeners();
+  }
+
+  void setError(bool value) {
+    _isError = value;
+    notifyListeners();
   }
 }

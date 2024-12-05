@@ -33,7 +33,7 @@ Future<void> bootstrap({
       runApp(
         MultiProvider(
           providers: [
-            Provider<CabBookingProvider>(
+            ChangeNotifierProvider<CabBookingProvider>(
               create: (_) => CabBookingProvider(cabRepositoryProvider),
             ),
           ],
