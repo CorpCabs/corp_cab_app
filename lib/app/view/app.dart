@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:corp_cab_app/app/constants/string_constants.dart';
 import 'package:corp_cab_app/app/l10n/l10n.dart';
 import 'package:corp_cab_app/app/router/app_router.dart' as app_router;
 import 'package:corp_cab_app/app/theme/dark/dark_theme.dart';
-import 'package:corp_cab_app/app/theme/light/light_theme.dart';
+import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -14,10 +13,9 @@ class App extends StatelessWidget {
     return MaterialApp.router(
       // App Name
       title: StringConstants.appName,
-      // Theme
-      themeMode: ThemeMode.system,
-      theme: LightTheme().theme,
-      darkTheme: DarkTheme().theme,
+      // theme: LightTheme().theme,
+      // darkTheme: DarkTheme().theme,
+      theme: DarkTheme().theme,
 
 
       // Localization

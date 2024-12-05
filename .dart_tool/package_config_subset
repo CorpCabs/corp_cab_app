@@ -250,6 +250,10 @@ mime
 3.2
 file:///home/lenovo/.pub-cache/hosted/pub.dev/mime-2.0.0/
 file:///home/lenovo/.pub-cache/hosted/pub.dev/mime-2.0.0/lib/
+nested
+2.12
+file:///home/lenovo/.pub-cache/hosted/pub.dev/nested-1.0.0/
+file:///home/lenovo/.pub-cache/hosted/pub.dev/nested-1.0.0/lib/
 package_config
 2.12
 file:///home/lenovo/.pub-cache/hosted/pub.dev/package_config-2.1.0/
@@ -286,6 +290,10 @@ pretty_dio_logger
 3.0
 file:///home/lenovo/.pub-cache/hosted/pub.dev/pretty_dio_logger-1.4.0/
 file:///home/lenovo/.pub-cache/hosted/pub.dev/pretty_dio_logger-1.4.0/lib/
+provider
+2.12
+file:///home/lenovo/.pub-cache/hosted/pub.dev/provider-6.1.2/
+file:///home/lenovo/.pub-cache/hosted/pub.dev/provider-6.1.2/lib/
 pub_semver
 2.17
 file:///home/lenovo/.pub-cache/hosted/pub.dev/pub_semver-2.1.4/

@@ -9,8 +9,15 @@ abstract class BaseTheme {
       useMaterial3: true,
       brightness: brightness,
       colorScheme: colorScheme,
-      //TODO: Customize widgets here
-        typography: Typography.material2021(),
+      fontFamily: 'Montserrat',
+      elevatedButtonTheme:  ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: colorScheme.primary,
+          foregroundColor: colorScheme.onPrimary,
+        ),
+      ),
+      // //TODO: Customize widgets here
+      // typography: Typography.material2021(),
     );
   }
 }
