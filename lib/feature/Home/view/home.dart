@@ -7,7 +7,6 @@ import 'package:corp_cab_app/core/extensions/context_extensions.dart';
 import 'package:corp_cab_app/core/utils/logger/logger_utils.dart';
 import 'package:corp_cab_app/feature/ScaffoldWithNavbar/components/vehicleCard.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -266,7 +265,7 @@ class HomePage extends StatelessWidget {
               child: SizedBox(
                 height: MediaQueryExtension(context).dynamicHeight(0.07),
                 width: MediaQueryExtension(context).dynamicWidth(0.5),
-                child: ElevatedButton(
+                child: FloatingActionButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       if (fromController.text.isEmpty ||

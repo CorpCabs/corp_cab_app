@@ -35,22 +35,35 @@ class DriverListPage extends StatelessWidget {
             itemBuilder: (context, index) {
               final driver = providerItem.drivers[index];
               final isSelected = driver == providerItem.selectedDriver;
-              return ListTile(
-                leading: CircleAvatar(
-                  backgroundColor: Colors.grey.shade300,
-                  child: const Icon(Icons.person, color: Colors.black),
+              return Container(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(Radius.circular(15)),
+                  color: isSelected ? const Color(0xff7b81ed) : null,
                 ),
-                title: Text(
-                  driver.name,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+                child: ListTile(
+                  leading: CircleAvatar(
+                    backgroundColor: Colors.grey.shade300,
+                    child: const Icon(Icons.person, color: Colors.black),
+                  ),
+                  title: Text(
+                    driver.name,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(
+                    'Rating: ${driver.rating.toStringAsFixed(1)}',
+                    style: const TextStyle(color: Colors.grey),
+                  ),
+                  trailing: isSelected
+                      ? const Icon(Icons.check_circle, color: Colors.white)
+                      : const Icon(Icons.circle_outlined),
+                  onTap: () {
+                    providerItem.selectDriver(driver);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('${driver.name} selected')),
+                    );
+                  },
+                  // tileColor:
                 ),
-                subtitle: Text(
-                  'Rating: ${driver.rating.toStringAsFixed(1)}',
-                  style: const TextStyle(color: Colors.grey),
-                ),
-                trailing: isSelected
-                    ? const Icon(Icons.check_circle, color: Colors.blue)
-                    : const Icon(Icons.circle_outlined),
               );
             },
           );

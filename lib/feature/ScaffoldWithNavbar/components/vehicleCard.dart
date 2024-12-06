@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 
-Widget buildVehicleCard(String title, String price, 
-// String imagePath, 
-bool isSelected,) {
+Widget buildVehicleCard(
+  String title,
+  String price,
+// String imagePath,
+  bool isSelected,
+) {
   return Container(
     decoration: BoxDecoration(
-      color: isSelected ? Colors.purple[100] : Colors.grey[900],
+      color: isSelected ? const Color(0xff7b81ed) : Colors.grey[900],
       borderRadius: BorderRadius.circular(14),
-      border: isSelected ? Border.all(color: Colors.purple, width: 2) : null,
+      border: isSelected
+          ? Border.all(color: const Color(0xff7b81ed), width: 2)
+          : null,
     ),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -21,7 +26,7 @@ bool isSelected,) {
         Text(
           title,
           style: TextStyle(
-            color: isSelected ? Colors.purple : Colors.white,
+            color: isSelected ? Colors.white : Colors.white,
             fontSize: 14,
             fontWeight: FontWeight.bold,
           ),
@@ -30,7 +35,7 @@ bool isSelected,) {
         Text(
           price,
           style: TextStyle(
-            color: isSelected ? Colors.purple : Colors.grey,
+            color: isSelected ? Colors.white : Colors.grey,
             fontSize: 12,
           ),
         ),
