@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:corp_cab_app/app/environment/app_environment.dart';
 import 'package:corp_cab_app/app/providers/cab_booking_provider.dart';
+import 'package:corp_cab_app/app/providers/driver_provider.dart';
 import 'package:corp_cab_app/app/repository/cab_bookimg_repository.dart';
 import 'package:corp_cab_app/core/utils/device_info/device_info_utils.dart';
 import 'package:corp_cab_app/core/utils/logger/logger_utils.dart';
@@ -35,6 +36,9 @@ Future<void> bootstrap({
           providers: [
             ChangeNotifierProvider<CabBookingProvider>(
               create: (_) => CabBookingProvider(cabRepositoryProvider),
+            ),
+            ChangeNotifierProvider<DriverProvider>(
+              create: (_) => DriverProvider(),
             ),
           ],
           child: await builder(),

@@ -8,6 +8,7 @@ import 'package:corp_cab_app/core/utils/logger/logger_utils.dart';
 import 'package:corp_cab_app/feature/ScaffoldWithNavbar/components/vehicleCard.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 @RoutePage()
@@ -268,29 +269,32 @@ class HomePage extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      // Perform further actions like making an API call
                       if (fromController.text.isEmpty ||
                           toController.text.isEmpty ||
                           context.read<CabBookingProvider>().selectedIndex ==
                               -1) {
                         context.read<CabBookingProvider>().setError(true);
                         ToastUtils.showErrorToast(
-                          'Please select fill in all the fields to book a cab',
+                          'Please fill in all the fields to book a cab',
                         );
                       } else {
                         context.read<CabBookingProvider>().setError(false);
-                      }
 
-                      LoggerUtils.instance.logInfo(
-                        'From: ${fromController.text}, To: ${toController.text}, Selected Index: ${context.read<CabBookingProvider>().selectedIndex}',
-                      );
-                      context
-                          .read<CabBookingProvider>()
-                          .setDropOffLocation(toController.text.trim());
-                      context
-                          .read<CabBookingProvider>()
-                          .setPickupLocation(fromController.text.trim());
-                      // We have already set the selectedindex we don't need to do it again
+                        // Update Provider State
+                        context
+                            .read<CabBookingProvider>()
+                            .setDropOffLocation(toController.text.trim());
+                        context
+                            .read<CabBookingProvider>()
+                            .setPickupLocation(fromController.text.trim());
+
+                        LoggerUtils.instance.logInfo(
+                          'From: ${fromController.text}, To: ${toController.text}, Selected Index: ${context.read<CabBookingProvider>().selectedIndex}',
+                        );
+
+                        // Navigate to Driver List Page
+                        context.go('/home/driver-list');
+                      }
                     } else {
                       LoggerUtils.instance.logError('Validation failed');
                     }
