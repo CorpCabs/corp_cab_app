@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class FeatureOnePage extends StatelessWidget {
-  const FeatureOnePage({super.key});
+class DriverListPage extends StatelessWidget {
+  const DriverListPage({super.key});
 
   @override
   Widget build(BuildContext context) {

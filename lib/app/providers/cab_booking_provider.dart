@@ -1,3 +1,4 @@
+import 'package:corp_cab_app/app/models/CabModel.dart';
 import 'package:corp_cab_app/app/repository/cab_bookimg_repository.dart';
 import 'package:flutter/material.dart';
 
@@ -6,43 +7,44 @@ class CabBookingProvider with ChangeNotifier {
   final CabBookingRepository _repository;
 
   // State variables
+  int? _selectedIndex;
   String _pickupLocation = '';
   String _dropOffLocation = '';
   String _selectedCabType = 'Standard';
   final double _fare = 0;
   bool _isLoading = false;
   bool _isError = false;
-  final List<Map<String, dynamic>> _vehicleData = [
-    {
-      'title': 'Economy',
-      'price': '548₽',
-      'imagePath': 'assets/economy.png',
-      'isSelected': true,
-    },
-    {
-      'title': 'Comfort',
-      'price': '864₽',
-      'imagePath': 'assets/comfort.png',
-      'isSelected': false,
-    },
-    {
-      'title': 'Business',
-      'price': '1200₽',
-      'imagePath': 'assets/business.png',
-      'isSelected': false,
-    },
-    {
-      'title': 'Luxury',
-      'price': '1800₽',
-      'imagePath': 'assets/luxury.png',
-      'isSelected': true,
-    },
-    {
-      'title': 'Luxury',
-      'price': '1800₽',
-      'imagePath': 'assets/luxury.png',
-      'isSelected': false,
-    },
+  final List<Vehicle> _vehicleData = [
+    Vehicle(
+      id: 1,
+      title: 'Economy',
+      price: '548₽',
+      imagePath: 'assets/economy.png',
+    ),
+    Vehicle(
+      id: 2,
+      title: 'Comfort',
+      price: '864₽',
+      imagePath: 'assets/comfort.png',
+    ),
+    Vehicle(
+      id: 3,
+      title: 'Business',
+      price: '1200₽',
+      imagePath: 'assets/business.png',
+    ),
+    Vehicle(
+      id: 4,
+      title: 'Luxury',
+      price: '1800₽',
+      imagePath: 'assets/luxury.png',
+    ),
+    Vehicle(
+      id: 5,
+      title: 'Luxury',
+      price: '1800₽',
+      imagePath: 'assets/luxury.png',
+    ),
   ];
 
   // Getters
@@ -50,9 +52,10 @@ class CabBookingProvider with ChangeNotifier {
   String get dropOffLocation => _dropOffLocation;
   String get selectedCabType => _selectedCabType;
   double get fare => _fare;
-  List<Map<String, dynamic>> get vehicleData => _vehicleData;
+  List<Vehicle> get vehicleData => _vehicleData;
   bool get isLoading => _isLoading;
   bool get isError => _isError;
+  int get selectedIndex => _selectedIndex ?? -1;
 
   // Setters
   void setPickupLocation(String location) {
@@ -108,6 +111,11 @@ class CabBookingProvider with ChangeNotifier {
 
   void setError(bool value) {
     _isError = value;
+    notifyListeners();
+  }
+
+  void setSelectedIndex(int index) {
+    _selectedIndex = index;
     notifyListeners();
   }
 }

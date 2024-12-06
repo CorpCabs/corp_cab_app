@@ -38,7 +38,7 @@ final router = GoRouter(
       routes: <RouteBase>[
         GoRoute(
           path: '/feature1',
-          builder: (context, state) => const FeatureOnePage(),
+          builder: (context, state) => const DriverListPage(),
         ),
       ],
     ),
