@@ -1,3 +1,4 @@
+import 'package:corp_cab_app/app/common/toast.dart';
 import 'package:corp_cab_app/app/providers/driver_provider.dart';
 import 'package:corp_cab_app/core/extensions/context_extensions.dart';
 import 'package:flutter/material.dart';
@@ -58,9 +59,9 @@ class DriverListPage extends StatelessWidget {
                       : const Icon(Icons.circle_outlined),
                   onTap: () {
                     providerItem.selectDriver(driver);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('${driver.name} selected')),
-                    );
+                    // ScaffoldMessenger.of(context).showSnackBar(
+                    //   SnackBar(content: Text('${driver.name} selected')),
+                    // );
                   },
                   // tileColor:
                 ),
@@ -69,6 +70,23 @@ class DriverListPage extends StatelessWidget {
           );
         },
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        label: const Padding(
+          padding: EdgeInsets.all(8),
+          child: Text('Book'),
+        ),
+        onPressed: () {
+          if (Provider.of<DriverProvider>(context).selectedDriver == null) {
+            ToastUtils.showErrorToast(
+              'Please select a driver',
+            );
+          }
+          else{
+            
+          }
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
