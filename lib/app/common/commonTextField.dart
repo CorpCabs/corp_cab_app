@@ -18,6 +18,7 @@ Widget commonTextField({
     decoration: InputDecoration(
       labelText: labelText,
       hintText: hintText,
+      prefixIcon: const Icon(Icons.location_on),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
       ),

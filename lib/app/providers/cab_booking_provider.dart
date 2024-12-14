@@ -18,31 +18,13 @@ class CabBookingProvider with ChangeNotifier {
     Vehicle(
       id: 1,
       title: 'Economy',
-      price: '548₽',
+      price: r'548$',
       imagePath: 'assets/economy.png',
     ),
     Vehicle(
       id: 2,
-      title: 'Comfort',
-      price: '864₽',
-      imagePath: 'assets/comfort.png',
-    ),
-    Vehicle(
-      id: 3,
-      title: 'Business',
-      price: '1200₽',
-      imagePath: 'assets/business.png',
-    ),
-    Vehicle(
-      id: 4,
       title: 'Luxury',
-      price: '1800₽',
-      imagePath: 'assets/luxury.png',
-    ),
-    Vehicle(
-      id: 5,
-      title: 'Luxury',
-      price: '1800₽',
+      price: r'1800$',
       imagePath: 'assets/luxury.png',
     ),
   ];

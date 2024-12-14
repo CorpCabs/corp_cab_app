@@ -305,6 +305,9 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(
+              height: MediaQueryExtension(context).dynamicHeight(0.2),
+            ),
           ],
         ),
       ),
