@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 class BookRidePage extends StatelessWidget {
   const BookRidePage({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
     final cabProvider = Provider.of<CabBookingProvider>(context);
@@ -30,6 +30,7 @@ class BookRidePage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 10),
             // Search Pickup
@@ -57,91 +58,66 @@ class BookRidePage extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
-            // Date and Time Row
-            // Row(
-            //   children: [
-            //     // Date Picker
-            //     Expanded(
-            //       child: GestureDetector(
-            //         onTap: () async {
-            //           final pickedDate = await showDatePicker(
-            //             context: context,
-            //             initialDate: cabProvider.selectedDate,
-            //             firstDate: DateTime.now(),
-            //             lastDate: DateTime(2100),
-            //           );
-            //           if (pickedDate != null) {
-            //             cabProvider.setSelectedDate(pickedDate);
-            //           }
-            //         },
-            //         child: Container(
-            //           padding: const EdgeInsets.symmetric(
-            //             horizontal: 10,
-            //             vertical: 15,
-            //           ),
-            //           decoration: BoxDecoration(
-            //             border: Border.all(color: Colors.grey),
-            //             borderRadius: BorderRadius.circular(10),
-            //           ),
-            //           child: Row(
-            //             children: [
-            //               const Icon(Icons.calendar_today, color: Colors.grey),
-            //               const SizedBox(width: 10),
-            //               Text(
-            //                 "${cabProvider.selectedDate.day.toString().padLeft(2, '0')}-${cabProvider.selectedDate.month.toString().padLeft(2, '0')}-${cabProvider.selectedDate.year}",
-            //                 style: const TextStyle(color: Colors.grey),
-            //               ),
-            //             ],
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //     const SizedBox(width: 20),
-            //     // Time Picker
-            //     Expanded(
-            //       child: GestureDetector(
-            //         onTap: () async {
-            //           final pickedTime = await showTimePicker(
-            //             context: context,
-            //             initialTime:
-            //                 TimeOfDay.fromDateTime(cabProvider.selectedDate),
-            //           );
-            //           if (pickedTime != null) {
-            //             cabProvider.setSelectedTime(pickedTime);
-            //           }
-            //         },
-            //         child: Container(
-            //           padding: const EdgeInsets.symmetric(
-            //             horizontal: 10,
-            //             vertical: 15,
-            //           ),
-            //           decoration: BoxDecoration(
-            //             border: Border.all(color: Colors.grey),
-            //             borderRadius: BorderRadius.circular(10),
-            //           ),
-            //           child: Row(
-            //             children: [
-            //               const Icon(Icons.access_time, color: Colors.grey),
-            //               const SizedBox(width: 10),
-            //               Text(
-            //                 cabProvider.selectedTime.format(context),
-            //                 style: const TextStyle(color: Colors.grey),
-            //               ),
-            //             ],
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
+            const SizedBox(height: 30),
+            // Saved Places Bar
+            const Text(
+              'Saved Places',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      cabProvider.setPickupLocation('Home');
+                    },
+                    child: Column(
+                      children: [
+                        Icon(Icons.home, color: Colors.grey[700], size: 30),
+                        const SizedBox(height: 5),
+                        const Text(
+                          'Home',
+                          style: TextStyle(fontSize: 14),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 40,
+                  width: 1,
+                  color: Colors.grey[300], // Divider between Home and Work
+                ),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      cabProvider.setPickupLocation('Work');
+                    },
+                    child: Column(
+                      children: [
+                        Icon(Icons.work, color: Colors.grey[700], size: 30),
+                        const SizedBox(height: 5),
+                        const Text(
+                          'Work',
+                          style: TextStyle(fontSize: 14),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
             const Spacer(),
             // Search Button
             ElevatedButton(
               onPressed: () {
                 // Handle search action
                 debugPrint(
-                  'Searching for a ride from ${cabProvider.pickupLocation} to ${cabProvider.dropOffLocation} on ${cabProvider.selectedDate} at ${cabProvider.selectedTime.format(context)}',
+                  'Searching for a ride from ${cabProvider.pickupLocation} to ${cabProvider.dropOffLocation}',
                 );
                 context.pushNamed('select-car');
               },
