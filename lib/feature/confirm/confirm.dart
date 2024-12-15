@@ -1,4 +1,6 @@
+import 'package:corp_cab_app/feature/Home/view/home.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class YourRidePage extends StatelessWidget {
   const YourRidePage({super.key});
@@ -57,7 +59,7 @@ class YourRidePage extends StatelessWidget {
               // Green button
               ElevatedButton(
                 onPressed: () {
-                  // Navigate to Ride Details or add functionality here
+                  context.go('/home/ride-details');
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,

@@ -21,6 +21,7 @@ import 'package:corp_cab_app/feature/activity/view/activity_page.dart';
 import 'package:corp_cab_app/feature/book_ride/bookride.dart';
 import 'package:corp_cab_app/feature/confirm/confirm.dart';
 import 'package:corp_cab_app/feature/index.dart';
+import 'package:corp_cab_app/feature/ride_details/details.dart';
 import 'package:corp_cab_app/feature/select_car/select_car.dart';
 // Create keys for `root` & `section` navigator avoiding unnecessary rebuilds
 import 'package:flutter/material.dart';
@@ -81,6 +82,10 @@ final router = GoRouter(
                 GoRoute(
                   path: '/booking-confirm',
                   builder: (context, state) => const YourRidePage(),
+                ),
+                GoRoute(
+                  path: '/ride-details',
+                  builder: (context, state) => RideDetailsPage(),
                 ),
               ],
             ),
