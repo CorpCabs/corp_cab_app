@@ -62,6 +62,7 @@ flutter:
     - assets/images/Home.svg
     - assets/images/SUV.png
     - assets/images/profile.svg
+    - assets/images/empty.svg
 
   fonts:
     - family: Montserrat
