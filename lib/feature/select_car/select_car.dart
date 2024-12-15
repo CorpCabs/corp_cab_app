@@ -1,6 +1,7 @@
 import 'package:corp_cab_app/core/extensions/context_extensions.dart';
+import 'package:corp_cab_app/feature/Home/view/home.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 class CarSelectionPage extends StatelessWidget {
   const CarSelectionPage({super.key});
@@ -71,7 +72,7 @@ class CarSelectionPage extends StatelessWidget {
               alignment: Alignment.bottomRight,
               child: FloatingActionButton(
                 onPressed: () {
-                  // Add functionality for the next step
+                  context.go('/home/driver-list');
                 },
                 backgroundColor: Colors.green,
                 child: const Icon(

@@ -19,6 +19,7 @@
 import 'package:corp_cab_app/app/router/custom_route_observer.dart';
 import 'package:corp_cab_app/feature/activity/view/activity_page.dart';
 import 'package:corp_cab_app/feature/book_ride/bookride.dart';
+import 'package:corp_cab_app/feature/confirm/confirm.dart';
 import 'package:corp_cab_app/feature/index.dart';
 import 'package:corp_cab_app/feature/select_car/select_car.dart';
 // Create keys for `root` & `section` navigator avoiding unnecessary rebuilds
@@ -76,6 +77,10 @@ final router = GoRouter(
                 GoRoute(
                   path: '/driver-list',
                   builder: (context, state) => const DriverListPage(),
+                ),
+                GoRoute(
+                  path: '/booking-confirm',
+                  builder: (context, state) => const YourRidePage(),
                 ),
               ],
             ),
