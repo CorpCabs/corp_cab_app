@@ -1,6 +1,5 @@
 import 'package:corp_cab_app/app/providers/cab_booking_provider.dart';
 import 'package:corp_cab_app/core/extensions/context_extensions.dart';
-import 'package:corp_cab_app/feature/Home/view/home.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -10,8 +9,6 @@ class CarSelectionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final vehicles = context.read<CabBookingProvider>().vehicleData;
-
     return Scaffold(
       backgroundColor: const Color(0xFFF8F8FF), // Light background color
       appBar: AppBar(
@@ -70,25 +67,28 @@ class CarSelectionPage extends StatelessWidget {
           //   ),
           // ),
           Expanded(
-            child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              itemCount: vehicles.length,
-              itemBuilder: (context, index) {
-                final vehicle = vehicles[index];
-                return GestureDetector(
-                  onTap: () => context
-                      .read<CabBookingProvider>()
-                      .setSelectedIndex(index),
-                  child: _buildCarOption(
-                    context: context,
-                    imageUrl: vehicle.imagePath,
-                    type: vehicle.type,
-                    seats: vehicle.seat as String,
-                    isSelected: index ==
-                            context.read<CabBookingProvider>().selectedIndex
-                        ? true
-                        : false,
-                  ),
+            child: Consumer<CabBookingProvider>(
+              builder: (context, providerItem, child) {
+                return ListView.builder(
+                  itemCount: providerItem.vehicleData.length,
+                  itemBuilder: (context, index) {
+                    final vehicle = providerItem.vehicleData[index];
+                    return GestureDetector(
+                      onTap: () => context
+                          .read<CabBookingProvider>()
+                          .setSelectedIndex(index),
+                      child: _buildCarOption(
+                        context: context,
+                        imageUrl: vehicle.imagePath,
+                        type: vehicle.type,
+                        seats: vehicle.seat.toString(),
+                        isSelected: index ==
+                                context.read<CabBookingProvider>().selectedIndex
+                            ? true
+                            : false,
+                      ),
+                    );
+                  },
                 );
               },
             ),
@@ -127,8 +127,11 @@ class CarSelectionPage extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isSelected == true ? Colors.green : Colors.white,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: isSelected == true ? Colors.green : Colors.white,
+        ),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
