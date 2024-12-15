@@ -1,5 +1,6 @@
 import 'package:corp_cab_app/app/providers/cab_booking_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class BookRidePage extends StatelessWidget {
@@ -142,6 +143,7 @@ class BookRidePage extends StatelessWidget {
                 debugPrint(
                   'Searching for a ride from ${cabProvider.pickupLocation} to ${cabProvider.dropOffLocation} on ${cabProvider.selectedDate} at ${cabProvider.selectedTime.format(context)}',
                 );
+                context.go('/home/driver-list');
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,

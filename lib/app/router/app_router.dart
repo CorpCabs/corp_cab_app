@@ -68,6 +68,10 @@ final router = GoRouter(
                   path: '/book-ride',
                   builder: (context, state) => const BookRidePage(),
                 ),
+                GoRoute(
+                  path: '/driver-list',
+                  builder: (context, state) => const DriverListPage(),
+                ),
               ],
             ),
           ],
