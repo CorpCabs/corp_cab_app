@@ -20,6 +20,7 @@ import 'package:corp_cab_app/app/router/custom_route_observer.dart';
 import 'package:corp_cab_app/feature/activity/view/activity_page.dart';
 import 'package:corp_cab_app/feature/book_ride/bookride.dart';
 import 'package:corp_cab_app/feature/index.dart';
+import 'package:corp_cab_app/feature/select_car/select_car.dart';
 // Create keys for `root` & `section` navigator avoiding unnecessary rebuilds
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -67,6 +68,10 @@ final router = GoRouter(
                 GoRoute(
                   path: '/book-ride',
                   builder: (context, state) => const BookRidePage(),
+                ),
+                GoRoute(
+                  path: '/select-car',
+                  builder: (context, state) => const CarSelectionPage(),
                 ),
                 GoRoute(
                   path: '/driver-list',
