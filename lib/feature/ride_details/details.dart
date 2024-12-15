@@ -1,3 +1,4 @@
+import 'package:corp_cab_app/app/router/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -12,10 +13,7 @@ class RideDetailsPage extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           onPressed: () {
-            while (context.canPop() == true) {
-              context.pop();
-            }
-            context.pushReplacementNamed('activity');
+            context.goNamed('home');
           },
           icon: const Icon(Icons.arrow_back, color: Colors.black),
         ),
