@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
 class DriverListPage extends StatelessWidget {
   const DriverListPage({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
-        leading: const Icon(Icons.arrow_back, color: Colors.black),
+        leading: IconButton(
+          onPressed: () => {
+            context.pop(),
+          },
+          icon: const Icon(Icons.arrow_back),
+          color: Colors.black,
+        ),
         title: const Text(
           'Available rides',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
-        actions: [
-        ],
+        actions: const [],
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
@@ -26,26 +30,28 @@ class DriverListPage extends StatelessWidget {
         children: [
           rideCard(
             context: context,
-            name: "WASEEM JAVED",
+            name: 'WASEEM JAVED',
             rating: 4.8,
-            dateTime: "Dec 15, 2024 | 3:40 PM",
-            startLocation: "Electronic City, Bengaluru",
-            endLocation: "M.G. Road, Bengaluru",
-            vehicleModel: "Sedan",
-            fare: "₹ 234",
-            driverImage: "assets/images/profile.svg", // Replace with your image path
+            dateTime: 'Dec 15, 2024 | 3:40 PM',
+            startLocation: 'Electronic City, Bengaluru',
+            endLocation: 'M.G. Road, Bengaluru',
+            vehicleModel: 'Sedan',
+            fare: '₹ 234',
+            driverImage:
+                'assets/images/profile.svg', // Replace with your image path
           ),
           const SizedBox(height: 12),
           rideCard(
             context: context,
-            name: "JAVED WASEEM",
+            name: 'JAVED WASEEM',
             rating: 4.8,
-            dateTime: "Dec 15, 2024 | 3:50 PM",
-            startLocation: "Electronic City, Bengaluru",
-            endLocation: "M.G. Road, Bengaluru",
-            vehicleModel: "Swift Dzire",
-            fare: "₹ 234",
-            driverImage: "assets/images/profile.svg", // Replace with your image path
+            dateTime: 'Dec 15, 2024 | 3:50 PM',
+            startLocation: 'Electronic City, Bengaluru',
+            endLocation: 'M.G. Road, Bengaluru',
+            vehicleModel: 'Swift Dzire',
+            fare: '₹ 234',
+            driverImage:
+                'assets/images/profile.svg', // Replace with your image path
           ),
         ],
       ),
@@ -101,7 +107,7 @@ class DriverListPage extends StatelessWidget {
                     children: [
                       const Icon(Icons.star, color: Colors.amber, size: 18),
                       Text(
-                        " ($rating)",
+                        ' ($rating)',
                         style: const TextStyle(color: Colors.grey),
                       ),
                     ],
@@ -123,7 +129,11 @@ class DriverListPage extends StatelessWidget {
           const SizedBox(height: 8),
           Row(
             children: [
-              const Icon(Icons.radio_button_checked, color: Colors.green, size: 18),
+              const Icon(
+                Icons.radio_button_checked,
+                color: Colors.green,
+                size: 18,
+              ),
               const SizedBox(width: 4),
               Text(startLocation, style: const TextStyle(fontSize: 13)),
             ],
@@ -150,7 +160,7 @@ class DriverListPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    "Vehicle Model",
+                    'Vehicle Model',
                     style: TextStyle(color: Colors.grey),
                   ),
                   Text(
@@ -190,10 +200,10 @@ class DriverListPage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 12),
               ),
               onPressed: () {
-                context.go('/home/booking-confirm');
+                context.pushNamed('booking-confirm');
               },
               child: const Text(
-                "Request",
+                'Request',
                 style: TextStyle(color: Colors.white, fontSize: 16),
               ),
             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class RideDetailsPage extends StatelessWidget {
   const RideDetailsPage({super.key});
@@ -9,7 +10,15 @@ class RideDetailsPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: const Icon(Icons.arrow_back, color: Colors.black),
+        leading: IconButton(
+          onPressed: () {
+            while (context.canPop() == true) {
+              context.pop();
+            }
+            context.pushReplacementNamed('activity');
+          },
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+        ),
         title: const Text(
           'Ride details',
           style: TextStyle(color: Colors.black, fontSize: 20),
@@ -45,7 +54,7 @@ class RideDetailsPage extends StatelessWidget {
 
             // Locations
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
                   Row(
@@ -83,15 +92,16 @@ class RideDetailsPage extends StatelessWidget {
             const Text(
               '03 : 40 PM',
               style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  letterSpacing: 1.5),
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                letterSpacing: 1.5,
+              ),
             ),
 
             // Vehicle Image
             const SizedBox(height: 20),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
                   const Align(
@@ -113,7 +123,7 @@ class RideDetailsPage extends StatelessWidget {
             // Call & Message Buttons
             const SizedBox(height: 30),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
                   ElevatedButton(
@@ -121,7 +131,8 @@ class RideDetailsPage extends StatelessWidget {
                       backgroundColor: Colors.green,
                       minimumSize: const Size(double.infinity, 50),
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
                     onPressed: () {
                       // Call Driver logic
@@ -137,7 +148,8 @@ class RideDetailsPage extends StatelessWidget {
                       backgroundColor: Colors.green,
                       minimumSize: const Size(double.infinity, 50),
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
                     onPressed: () {
                       // Message Driver logic

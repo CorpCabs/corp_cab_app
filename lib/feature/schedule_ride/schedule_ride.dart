@@ -143,7 +143,7 @@ class ScheduleRidePage extends StatelessWidget {
                 debugPrint(
                   'Searching for a ride from ${cabProvider.pickupLocation} to ${cabProvider.dropOffLocation} on ${cabProvider.selectedDate} at ${cabProvider.selectedTime.format(context)}',
                 );
-                context.go('/home/select-car');
+                context.pushNamed('select-car');
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,

@@ -66,30 +66,37 @@ final router = GoRouter(
             // each routes with its sub routes if available e.g shope/uuid/details
             GoRoute(
               path: '/home',
+              name: 'home',
               builder: (context, state) => const HomePage(),
               routes: <RouteBase>[
                 GoRoute(
                   path: '/book-ride',
+                  name: 'book-ride',
                   builder: (context, state) => const BookRidePage(),
                 ),
                 GoRoute(
                   path: '/schedule-ride',
+                  name: 'schedule-ride',
                   builder: (context, state) => const ScheduleRidePage(),
                 ),
                 GoRoute(
                   path: '/select-car',
+                  name: 'select-car',
                   builder: (context, state) => const CarSelectionPage(),
                 ),
                 GoRoute(
                   path: '/driver-list',
+                  name: 'driver-list',
                   builder: (context, state) => const DriverListPage(),
                 ),
                 GoRoute(
                   path: '/booking-confirm',
+                  name: 'booking-confirm',
                   builder: (context, state) => const YourRidePage(),
                 ),
                 GoRoute(
                   path: '/ride-details',
+                  name: 'ride-details',
                   builder: (context, state) => const RideDetailsPage(),
                 ),
               ],
@@ -103,6 +110,7 @@ final router = GoRouter(
           routes: <RouteBase>[
             GoRoute(
               path: '/activity',
+              name: 'activity',
               builder: (context, state) => const ActivityPage(),
               // routes: <RouteBase> [
 

@@ -100,7 +100,7 @@ class CarSelectionPage extends StatelessWidget {
               alignment: Alignment.bottomRight,
               child: FloatingActionButton(
                 onPressed: () {
-                  context.go('/home/driver-list');
+                  context.pushNamed('driver-list');
                 },
                 backgroundColor: Colors.green,
                 child: const Icon(

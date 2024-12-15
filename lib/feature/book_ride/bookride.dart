@@ -15,7 +15,7 @@ class BookRidePage extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.close, color: Colors.black),
           onPressed: () {
-            Navigator.pop(context); // Close the page
+            context.pop(); // Close the page
           },
         ),
         backgroundColor: Colors.transparent,
@@ -143,7 +143,7 @@ class BookRidePage extends StatelessWidget {
                 debugPrint(
                   'Searching for a ride from ${cabProvider.pickupLocation} to ${cabProvider.dropOffLocation} on ${cabProvider.selectedDate} at ${cabProvider.selectedTime.format(context)}',
                 );
-                context.go('/home/select-car');
+                context.pushNamed('select-car');
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,

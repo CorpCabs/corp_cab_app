@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
               const Spacer(),
               ElevatedButton(
                 onPressed: () {
-                  context.go('/home/book-ride');
+                  context.pushNamed('book-ride');
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
@@ -53,7 +53,7 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 20),
               OutlinedButton(
                 onPressed: () {
-                  context.go('/home/schedule-ride');
+                  context.pushNamed('schedule-ride');
                 },
                 style: OutlinedButton.styleFrom(
                   side: const BorderSide(),

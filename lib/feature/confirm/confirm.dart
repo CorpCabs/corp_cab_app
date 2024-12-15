@@ -59,7 +59,7 @@ class YourRidePage extends StatelessWidget {
               // Green button
               ElevatedButton(
                 onPressed: () {
-                  context.go('/home/ride-details');
+                  context.pushNamed('ride-details');
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
