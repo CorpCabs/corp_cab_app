@@ -6,6 +6,7 @@ import 'package:corp_cab_app/app/validators/text_field_validator.dart';
 import 'package:corp_cab_app/core/extensions/context_extensions.dart';
 import 'package:corp_cab_app/core/utils/logger/logger_utils.dart';
 import 'package:corp_cab_app/feature/ScaffoldWithNavbar/components/vehicleCard.dart';
+import 'package:corp_cab_app/feature/book_ride/bookride.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -43,7 +44,7 @@ class HomePage extends StatelessWidget {
               const Spacer(),
               ElevatedButton(
                 onPressed: () {
-                  // Handle find a ride
+                  context.go('/home/book-ride');
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
@@ -60,7 +61,6 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 20),
               OutlinedButton(
                 onPressed: () {
-                  
                 },
                 style: OutlinedButton.styleFrom(
                   side: const BorderSide(color: Colors.black),
