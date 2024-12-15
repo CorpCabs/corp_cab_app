@@ -14,6 +14,8 @@ class CabBookingProvider with ChangeNotifier {
   final double _fare = 0;
   bool _isLoading = false;
   bool _isError = false;
+  DateTime _selectedDate = DateTime.now(); // Initialize with current date
+  TimeOfDay _selectedTime = TimeOfDay.now(); // Initialize with current time
   final List<Vehicle> _vehicleData = [
     Vehicle(
       id: 1,
@@ -38,6 +40,8 @@ class CabBookingProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get isError => _isError;
   int get selectedIndex => _selectedIndex ?? -1;
+  DateTime get selectedDate => _selectedDate; // Getter for selectedDate
+  TimeOfDay get selectedTime => _selectedTime; // Getter for selectedTime
 
   // Setters
   void setPickupLocation(String location) {
@@ -98,6 +102,16 @@ class CabBookingProvider with ChangeNotifier {
 
   void setSelectedIndex(int index) {
     _selectedIndex = index;
+    notifyListeners();
+  }
+
+  void setSelectedDate(DateTime date) {
+    _selectedDate = date;
+    notifyListeners();
+  }
+
+  void setSelectedTime(TimeOfDay time) {
+    _selectedTime = time;
     notifyListeners();
   }
 }
