@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 class BookRidePage extends StatelessWidget {
   const BookRidePage({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     final cabProvider = Provider.of<CabBookingProvider>(context);
@@ -38,7 +38,7 @@ class BookRidePage extends StatelessWidget {
               onChanged: cabProvider.setPickupLocation,
               decoration: InputDecoration(
                 hintText: 'Search Pickup',
-                prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                prefixIcon: const Icon(Icons.location_on, color: Colors.grey),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: const BorderSide(color: Colors.grey),
@@ -51,7 +51,7 @@ class BookRidePage extends StatelessWidget {
               onChanged: cabProvider.setDropOffLocation,
               decoration: InputDecoration(
                 hintText: 'Search Destination',
-                prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                prefixIcon: const Icon(Icons.location_on, color: Colors.grey),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: const BorderSide(color: Colors.grey),

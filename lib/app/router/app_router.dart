@@ -126,7 +126,7 @@ final router = GoRouter(
           routes: <RouteBase>[
             GoRoute(
               path: '/setting',
-              builder: (context, state) => const SettingsPage(),
+              builder: (context, state) => SettingsPage(),
               // routes: <RouteBase> [
 
               // ],

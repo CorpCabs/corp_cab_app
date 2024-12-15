@@ -37,7 +37,7 @@ class ScheduleRidePage extends StatelessWidget {
               onChanged: cabProvider.setPickupLocation,
               decoration: InputDecoration(
                 hintText: 'Search Pickup',
-                prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                prefixIcon: const Icon(Icons.location_on, color: Colors.grey),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: const BorderSide(color: Colors.grey),
@@ -50,7 +50,7 @@ class ScheduleRidePage extends StatelessWidget {
               onChanged: cabProvider.setDropOffLocation,
               decoration: InputDecoration(
                 hintText: 'Search Destination',
-                prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                prefixIcon: const Icon(Icons.location_on, color: Colors.grey),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: const BorderSide(color: Colors.grey),
@@ -81,16 +81,16 @@ class ScheduleRidePage extends StatelessWidget {
                         vertical: 15,
                       ),
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
+                        border: Border.all(),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Row(
                         children: [
-                          const Icon(Icons.calendar_today, color: Colors.grey),
+                          const Icon(Icons.calendar_today, color: Colors.black),
                           const SizedBox(width: 10),
                           Text(
                             "${cabProvider.selectedDate.day.toString().padLeft(2, '0')}-${cabProvider.selectedDate.month.toString().padLeft(2, '0')}-${cabProvider.selectedDate.year}",
-                            style: const TextStyle(color: Colors.grey),
+                            style: const TextStyle(color: Colors.black),
                           ),
                         ],
                       ),
@@ -117,16 +117,16 @@ class ScheduleRidePage extends StatelessWidget {
                         vertical: 15,
                       ),
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
+                        border: Border.all(),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Row(
                         children: [
-                          const Icon(Icons.access_time, color: Colors.grey),
+                          const Icon(Icons.access_time, color: Colors.black),
                           const SizedBox(width: 10),
                           Text(
                             cabProvider.selectedTime.format(context),
-                            style: const TextStyle(color: Colors.grey),
+                            style: const TextStyle(color: Colors.black),
                           ),
                         ],
                       ),

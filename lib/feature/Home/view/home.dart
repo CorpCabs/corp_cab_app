@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'GOOD DAY,\nSiffat',
+                  'GOOD DAY,\nRaunak',
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
               const Spacer(),
               ElevatedButton(
                 onPressed: () {
-                  context.pushNamed('book-ride');
+                  context.pushNamed('schedule-ride');
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
@@ -46,27 +46,27 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 child: const Text(
-                  'Book a ride now',
+                  'Schedule a ride',
                   style: TextStyle(fontSize: 18),
                 ),
               ),
               const SizedBox(height: 20),
-              OutlinedButton(
-                onPressed: () {
-                  context.pushNamed('schedule-ride');
-                },
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(),
-                  minimumSize: const Size(double.infinity, 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                child: const Text(
-                  'Schedule for Later',
-                  style: TextStyle(fontSize: 18, color: Colors.black),
-                ),
-              ),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     context.pushNamed('schedule-ride');
+              //   },
+              //   style: ElevatedButton.styleFrom(
+              //     side: const BorderSide(),
+              //     minimumSize: const Size(double.infinity, 50),
+              //     shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(10),
+              //     ),
+              //   ),
+              //   child: const Text(
+              //     'Schedule a ride',
+              //     style: TextStyle(fontSize: 18, color: Colors.black),
+              //   ),
+              // ),
               const SizedBox(height: 40),
             ],
           ),
