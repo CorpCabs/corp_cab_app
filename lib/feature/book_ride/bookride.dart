@@ -59,82 +59,82 @@ class BookRidePage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             // Date and Time Row
-            Row(
-              children: [
-                // Date Picker
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () async {
-                      final pickedDate = await showDatePicker(
-                        context: context,
-                        initialDate: cabProvider.selectedDate,
-                        firstDate: DateTime.now(),
-                        lastDate: DateTime(2100),
-                      );
-                      if (pickedDate != null) {
-                        cabProvider.setSelectedDate(pickedDate);
-                      }
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 15,
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.calendar_today, color: Colors.grey),
-                          const SizedBox(width: 10),
-                          Text(
-                            "${cabProvider.selectedDate.day.toString().padLeft(2, '0')}-${cabProvider.selectedDate.month.toString().padLeft(2, '0')}-${cabProvider.selectedDate.year}",
-                            style: const TextStyle(color: Colors.grey),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 20),
-                // Time Picker
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () async {
-                      final pickedTime = await showTimePicker(
-                        context: context,
-                        initialTime:
-                            TimeOfDay.fromDateTime(cabProvider.selectedDate),
-                      );
-                      if (pickedTime != null) {
-                        cabProvider.setSelectedTime(pickedTime);
-                      }
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 15,
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.access_time, color: Colors.grey),
-                          const SizedBox(width: 10),
-                          Text(
-                            cabProvider.selectedTime.format(context),
-                            style: const TextStyle(color: Colors.grey),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            // Row(
+            //   children: [
+            //     // Date Picker
+            //     Expanded(
+            //       child: GestureDetector(
+            //         onTap: () async {
+            //           final pickedDate = await showDatePicker(
+            //             context: context,
+            //             initialDate: cabProvider.selectedDate,
+            //             firstDate: DateTime.now(),
+            //             lastDate: DateTime(2100),
+            //           );
+            //           if (pickedDate != null) {
+            //             cabProvider.setSelectedDate(pickedDate);
+            //           }
+            //         },
+            //         child: Container(
+            //           padding: const EdgeInsets.symmetric(
+            //             horizontal: 10,
+            //             vertical: 15,
+            //           ),
+            //           decoration: BoxDecoration(
+            //             border: Border.all(color: Colors.grey),
+            //             borderRadius: BorderRadius.circular(10),
+            //           ),
+            //           child: Row(
+            //             children: [
+            //               const Icon(Icons.calendar_today, color: Colors.grey),
+            //               const SizedBox(width: 10),
+            //               Text(
+            //                 "${cabProvider.selectedDate.day.toString().padLeft(2, '0')}-${cabProvider.selectedDate.month.toString().padLeft(2, '0')}-${cabProvider.selectedDate.year}",
+            //                 style: const TextStyle(color: Colors.grey),
+            //               ),
+            //             ],
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //     const SizedBox(width: 20),
+            //     // Time Picker
+            //     Expanded(
+            //       child: GestureDetector(
+            //         onTap: () async {
+            //           final pickedTime = await showTimePicker(
+            //             context: context,
+            //             initialTime:
+            //                 TimeOfDay.fromDateTime(cabProvider.selectedDate),
+            //           );
+            //           if (pickedTime != null) {
+            //             cabProvider.setSelectedTime(pickedTime);
+            //           }
+            //         },
+            //         child: Container(
+            //           padding: const EdgeInsets.symmetric(
+            //             horizontal: 10,
+            //             vertical: 15,
+            //           ),
+            //           decoration: BoxDecoration(
+            //             border: Border.all(color: Colors.grey),
+            //             borderRadius: BorderRadius.circular(10),
+            //           ),
+            //           child: Row(
+            //             children: [
+            //               const Icon(Icons.access_time, color: Colors.grey),
+            //               const SizedBox(width: 10),
+            //               Text(
+            //                 cabProvider.selectedTime.format(context),
+            //                 style: const TextStyle(color: Colors.grey),
+            //               ),
+            //             ],
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
             const Spacer(),
             // Search Button
             ElevatedButton(

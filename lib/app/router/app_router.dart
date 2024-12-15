@@ -22,6 +22,7 @@ import 'package:corp_cab_app/feature/book_ride/bookride.dart';
 import 'package:corp_cab_app/feature/confirm/confirm.dart';
 import 'package:corp_cab_app/feature/index.dart';
 import 'package:corp_cab_app/feature/ride_details/details.dart';
+import 'package:corp_cab_app/feature/schedule_ride/schedule_ride.dart';
 import 'package:corp_cab_app/feature/select_car/select_car.dart';
 // Create keys for `root` & `section` navigator avoiding unnecessary rebuilds
 import 'package:flutter/material.dart';
@@ -65,11 +66,15 @@ final router = GoRouter(
             // each routes with its sub routes if available e.g shope/uuid/details
             GoRoute(
               path: '/home',
-              builder: (context, state) => HomePage(),
+              builder: (context, state) => const HomePage(),
               routes: <RouteBase>[
                 GoRoute(
                   path: '/book-ride',
                   builder: (context, state) => const BookRidePage(),
+                ),
+                GoRoute(
+                  path: '/schedule-ride',
+                  builder: (context, state) => const ScheduleRidePage(),
                 ),
                 GoRoute(
                   path: '/select-car',
@@ -85,7 +90,7 @@ final router = GoRouter(
                 ),
                 GoRoute(
                   path: '/ride-details',
-                  builder: (context, state) => RideDetailsPage(),
+                  builder: (context, state) => const RideDetailsPage(),
                 ),
               ],
             ),

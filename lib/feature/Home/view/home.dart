@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
       backgroundColor: Colors.grey[100], // Light grey background
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(20),
           child: Column(
             children: [
               const SizedBox(height: 20),
@@ -53,9 +53,10 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 20),
               OutlinedButton(
                 onPressed: () {
+                  context.go('/home/schedule-ride');
                 },
                 style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: Colors.black),
+                  side: const BorderSide(),
                   minimumSize: const Size(double.infinity, 50),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -74,4 +75,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-

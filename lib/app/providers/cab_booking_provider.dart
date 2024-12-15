@@ -19,15 +19,15 @@ class CabBookingProvider with ChangeNotifier {
   final List<Vehicle> _vehicleData = [
     Vehicle(
       id: 1,
-      title: 'Economy',
-      price: r'548$',
-      imagePath: 'assets/economy.png',
+      type: 'Economy',
+      seat: 4,
+      imagePath: 'assets/images/car.png',
     ),
     Vehicle(
       id: 2,
-      title: 'Luxury',
-      price: r'1800$',
-      imagePath: 'assets/luxury.png',
+      type: 'Luxury',
+      seat: 6,
+      imagePath: 'assets/images/SUV.png',
     ),
   ];
 

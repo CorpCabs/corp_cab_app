@@ -1,13 +1,17 @@
+import 'package:corp_cab_app/app/providers/cab_booking_provider.dart';
 import 'package:corp_cab_app/core/extensions/context_extensions.dart';
 import 'package:corp_cab_app/feature/Home/view/home.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class CarSelectionPage extends StatelessWidget {
   const CarSelectionPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final vehicles = context.read<CabBookingProvider>().vehicleData;
+
     return Scaffold(
       backgroundColor: const Color(0xFFF8F8FF), // Light background color
       appBar: AppBar(
@@ -44,25 +48,49 @@ class CarSelectionPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
+          // Expanded(
+          //   child: ListView(
+          //     physics: const BouncingScrollPhysics(),
+          //     children: [
+          //       _buildCarOption(
+          //         context: context,
+          //         imageUrl:
+          //             'assets/images/car.png', // Replace with your image asset path
+          //         type: 'Economic',
+          //         seats: '4',
+          //       ),
+          //       _buildCarOption(
+          //         context: context,
+          //         imageUrl:
+          //             'assets/images/SUV.png', // Replace with your image asset path
+          //         type: 'Luxury',
+          //         seats: '6',
+          //       ),
+          //     ],
+          //   ),
+          // ),
           Expanded(
-            child: ListView(
+            child: ListView.builder(
               physics: const BouncingScrollPhysics(),
-              children: [
-                _buildCarOption(
-                  context: context,
-                  imageUrl:
-                      'assets/images/car.png', // Replace with your image asset path
-                  type: 'Economic',
-                  seats: '4',
-                ),
-                _buildCarOption(
-                  context: context,
-                  imageUrl:
-                      'assets/images/SUV.png', // Replace with your image asset path
-                  type: 'Luxury',
-                  seats: '6',
-                ),
-              ],
+              itemCount: vehicles.length,
+              itemBuilder: (context, index) {
+                final vehicle = vehicles[index];
+                return GestureDetector(
+                  onTap: () => context
+                      .read<CabBookingProvider>()
+                      .setSelectedIndex(index),
+                  child: _buildCarOption(
+                    context: context,
+                    imageUrl: vehicle.imagePath,
+                    type: vehicle.type,
+                    seats: vehicle.seat as String,
+                    isSelected: index ==
+                            context.read<CabBookingProvider>().selectedIndex
+                        ? true
+                        : false,
+                  ),
+                );
+              },
             ),
           ),
           const SizedBox(height: 20),
@@ -93,12 +121,13 @@ class CarSelectionPage extends StatelessWidget {
     required String imageUrl,
     required String type,
     required String seats,
+    required bool isSelected,
   }) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: isSelected == true ? Colors.green : Colors.white,
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
