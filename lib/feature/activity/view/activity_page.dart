@@ -1,3 +1,4 @@
+import 'package:corp_cab_app/core/extensions/context_extensions.dart';
 import 'package:corp_cab_app/feature/Home/view/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -31,10 +32,6 @@ class _MyRidesPageState extends State<ActivityPage>
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => Navigator.pop(context),
-        ),
         bottom: TabBar(
           controller: _tabController,
           labelColor: Colors.white,
@@ -94,16 +91,33 @@ class UpcomingRidesPage extends StatelessWidget {
               ],
             ),
             child: ListTile(
+              // onTap: () => context.pushNamed('ride-details'),
               contentPadding:
                   const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
               leading: const CircleAvatar(
                 backgroundImage: AssetImage('assets/user_placeholder.png'),
               ),
-              title: const Text(
-                'WASEEM JAVED',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              subtitle: Column(
+              title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween, // Space between name and pending
+              children: [
+                const Text(
+                  'Waseem Javed',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                      decoration: BoxDecoration(
+                        color: Colors.orangeAccent,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: const Text(
+                        'Pending',
+                        style: TextStyle(color: Colors.white, fontSize: 12),
+                      ),
+                    ),
+                  ],
+                ),
+                subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
@@ -118,31 +132,19 @@ class UpcomingRidesPage extends StatelessWidget {
                   const SizedBox(height: 5),
                   Row(
                     children: const [
-                      Icon(Icons.location_on, color: Colors.green, size: 16),
+                      Icon(Icons.location_on, color: Colors.green, size: 12),
                       SizedBox(width: 5),
                       Text('Electronic City, Bengaluru'),
                     ],
                   ),
                   Row(
                     children: const [
-                      Icon(Icons.flag, color: Colors.black, size: 16),
+                      Icon(Icons.flag, color: Colors.black, size: 12),
                       SizedBox(width: 5),
                       Text('M.G. Road, Bengaluru'),
                     ],
                   ),
                 ],
-              ),
-              trailing: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                decoration: BoxDecoration(
-                  color: Colors.orangeAccent,
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: const Text(
-                  'Pending',
-                  style: TextStyle(color: Colors.white, fontSize: 12),
-                ),
               ),
             ),
           ),
@@ -163,11 +165,12 @@ class CompletedRidesPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset(
-              'assets/empty.svg',
-              width: 150,
-              height: 150,
-            ),
+            Center(
+                child: SvgPicture.asset(
+                  'assets/images/empty.svg', // Add your image asset here
+                  height:MediaQueryExtension(context).veryhighValue2x
+                ),
+              ),
             const SizedBox(height: 20),
             const Text(
               'You have not completed a ride yet!!',
