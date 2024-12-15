@@ -20,7 +20,7 @@ class CarSelectionPage extends StatelessWidget {
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: const Text(
-              "Cancel",
+              'Cancel',
               style: TextStyle(color: Colors.red, fontSize: 16),
             ),
           ),
@@ -29,11 +29,11 @@ class CarSelectionPage extends StatelessWidget {
       body: Column(
         children: [
           const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "Please select the type of car you need:",
+                'Please select the type of car you need:',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -49,22 +49,24 @@ class CarSelectionPage extends StatelessWidget {
               children: [
                 _buildCarOption(
                   context: context,
-                  imageUrl: "assets/images/car.svg", // Replace with your image asset path
-                  type: "Economic",
-                  seats: "4",
+                  imageUrl:
+                      'assets/images/car.png', // Replace with your image asset path
+                  type: 'Economic',
+                  seats: '4',
                 ),
                 _buildCarOption(
                   context: context,
-                  imageUrl: "assets/images/SUV.svg", // Replace with your image asset path
-                  type: "Luxury",
-                  seats: "6",
+                  imageUrl:
+                      'assets/images/SUV.png', // Replace with your image asset path
+                  type: 'Luxury',
+                  seats: '6',
                 ),
               ],
             ),
           ),
           const SizedBox(height: 20),
           Padding(
-            padding: const EdgeInsets.only(bottom: 16.0, right: 16.0),
+            padding: const EdgeInsets.only(bottom: 16, right: 16),
             child: Align(
               alignment: Alignment.bottomRight,
               child: FloatingActionButton(
@@ -72,7 +74,11 @@ class CarSelectionPage extends StatelessWidget {
                   // Add functionality for the next step
                 },
                 backgroundColor: Colors.green,
-                child: const Icon(Icons.arrow_forward, size: 30, color: Colors.white),
+                child: const Icon(
+                  Icons.arrow_forward,
+                  size: 30,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
@@ -104,8 +110,12 @@ class CarSelectionPage extends StatelessWidget {
       ),
       child: Column(
         children: [
-          SvgPicture.asset(imageUrl, height: MediaQueryExtension(context).veryhighValue1x, fit: BoxFit.contain),
-          const SizedBox(height: 10),
+          Image.asset(
+            imageUrl,
+            height: MediaQueryExtension(context).veryhighValue1x,
+            fit: BoxFit.contain,
+          ),
+          SizedBox(height: MediaQueryExtension(context).highValue),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -113,7 +123,7 @@ class CarSelectionPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    "Vehicle Type",
+                    'Vehicle Type',
                     style: TextStyle(color: Colors.grey),
                   ),
                   Text(
@@ -129,7 +139,7 @@ class CarSelectionPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   const Text(
-                    "No. of seats",
+                    'No. of seats',
                     style: TextStyle(color: Colors.grey),
                   ),
                   Text(
