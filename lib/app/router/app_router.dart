@@ -17,6 +17,9 @@
 // }
 
 import 'package:corp_cab_app/app/router/custom_route_observer.dart';
+import 'package:corp_cab_app/feature/Log_In/LogIn.dart';
+import 'package:corp_cab_app/feature/OTP_Page/OTPPage.dart';
+import 'package:corp_cab_app/feature/Sign_Up/SignUp.dart';
 import 'package:corp_cab_app/feature/activity/view/activity_page.dart';
 import 'package:corp_cab_app/feature/book_ride/bookride.dart';
 import 'package:corp_cab_app/feature/confirm/confirm.dart';
@@ -24,6 +27,8 @@ import 'package:corp_cab_app/feature/index.dart';
 import 'package:corp_cab_app/feature/ride_details/details.dart';
 import 'package:corp_cab_app/feature/schedule_ride/schedule_ride.dart';
 import 'package:corp_cab_app/feature/select_car/select_car.dart';
+import 'package:corp_cab_app/feature/Welcome_Page/welcome.dart';
+
 // Create keys for `root` & `section` navigator avoiding unnecessary rebuilds
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -33,22 +38,31 @@ final _sectionNavigatorKey = GlobalKey<NavigatorState>();
 
 final router = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/home',
+  initialLocation: '/welcome',
   observers: [
     GoRouterObserver(),
   ],
   routes: <RouteBase>[
-    /*
     GoRoute(
-      path: '/home',
-      builder: (context, state) => HomePage(),
-      routes: <RouteBase>[
-        GoRoute(
-          path: '/driver-list',
-          builder: (context, state) => const DriverListPage(),
-        ),
-      ],
-    ),*/
+      path: '/welcome',
+      name: 'welcome',
+      builder: (context, state) => const WelcomePage(),
+    ),
+    GoRoute(
+      path: '/login-page',
+      name: 'login-page',
+      builder: (context, state) => const LoginPage(),
+    ),
+    GoRoute(
+      path: '/OTP-page',
+      name: 'OTP-page',
+      builder: (context, state) => OTPPage(),
+    ),
+    GoRoute(
+      path: '/signup-page',
+      name: 'signup-page',
+      builder: (context, state) => const SignUnPage(),
+    ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
         // Return the widget that implements the custom shell (e.g a BottomNavigationBar).
@@ -62,7 +76,7 @@ final router = GoRouter(
         // The route branch for the 1º Tab
         StatefulShellBranch(
           routes: <RouteBase>[
-            // Add this branch routes
+            // Add this branch routes/home/thehappybaloney/development/corp_cab_app/lib/feature/Log_In
             // each routes with its sub routes if available e.g shope/uuid/details
             GoRoute(
               path: '/home',
