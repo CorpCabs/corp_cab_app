@@ -17,10 +17,12 @@
 // }
 
 import 'package:corp_cab_app/app/router/custom_route_observer.dart';
-import 'package:corp_cab_app/feature/Log_In/LogIn.dart';
-import 'package:corp_cab_app/feature/OTP_Page/OTPPage.dart';
-import 'package:corp_cab_app/feature/Sign_Up/SignUp.dart';
+import 'package:corp_cab_app/feature/auth/Log_In/LogIn.dart';
+import 'package:corp_cab_app/feature/auth/OTP_Page/OTPPage.dart';
+// import 'package:corp_cab_app/feature/auth/Sign_Up/SignUp.dart';
 import 'package:corp_cab_app/feature/activity/view/activity_page.dart';
+import 'package:corp_cab_app/feature/auth/Sign_Up/SignUp.dart';
+import 'package:corp_cab_app/feature/auth/index.dart';
 import 'package:corp_cab_app/feature/book_ride/bookride.dart';
 import 'package:corp_cab_app/feature/confirm/confirm.dart';
 import 'package:corp_cab_app/feature/index.dart';
@@ -32,6 +34,7 @@ import 'package:corp_cab_app/feature/Welcome_Page/welcome.dart';
 // Create keys for `root` & `section` navigator avoiding unnecessary rebuilds
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _sectionNavigatorKey = GlobalKey<NavigatorState>();
@@ -49,35 +52,35 @@ final router = GoRouter(
       builder: (context, state) => const WelcomePage(),
     ),
     GoRoute(
-      path: '/login-page',
-      name: 'login-page',
-      builder: (context, state) => const LoginPage(),
-    ),
-    GoRoute(
-      path: '/OTP-page',
-      name: 'OTP-page',
-      builder: (context, state) => OTPPage(),
-    ),
-    GoRoute(
-      path: '/signup-page',
-      name: 'signup-page',
-      builder: (context, state) => const SignUnPage(),
+      path: '/auth',
+      builder: (context, state) => AuthPage(),
+      routes: [
+        GoRoute(
+          path: '/login-page',
+          name: 'login-page',
+          builder: (context, state) => const LoginPage(),
+        ),
+        GoRoute(
+          path: '/OTP-page',
+          name: 'OTP-page',
+          builder: (context, state) => OTPPage(),
+        ),
+        GoRoute(
+          path: '/signup-page',
+          name: 'signup-page',
+          builder: (context, state) => const SignUpPage(),
+        ),
+      ],
     ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
-        // Return the widget that implements the custom shell (e.g a BottomNavigationBar).
-        // The [StatefulNavigationShell] is passed to be able to navigate to other branches in a stateful way.
-        // return ScaffoldWithNavbar(navigationShell: navigationShell);
         return ScaffoldWithNavbar(
           navigationShell: navigationShell,
         );
       },
       branches: [
-        // The route branch for the 1º Tab
         StatefulShellBranch(
           routes: <RouteBase>[
-            // Add this branch routes/home/thehappybaloney/development/corp_cab_app/lib/feature/Log_In
-            // each routes with its sub routes if available e.g shope/uuid/details
             GoRoute(
               path: '/home',
               name: 'home',
@@ -117,33 +120,21 @@ final router = GoRouter(
             ),
           ],
         ),
-        // The route branch for 2º Tab
         StatefulShellBranch(
-          // Add this branch routes
-          // each routes with its sub routes if available e.g feed/uuid/details
           routes: <RouteBase>[
             GoRoute(
               path: '/activity',
               name: 'activity',
               builder: (context, state) => const ActivityPage(),
-              // routes: <RouteBase> [
-
-              // ],
             ),
           ],
         ),
-        // The route branch for 3º Tab
         StatefulShellBranch(
           navigatorKey: _sectionNavigatorKey,
-          // Add this branch routes
-          // each routes with its sub routes if available e.g feed/uuid/details
           routes: <RouteBase>[
             GoRoute(
               path: '/setting',
-              builder: (context, state) => SettingsPage(),
-              // routes: <RouteBase> [
-
-              // ],
+              builder: (context, state) => SettingsPage(),  // Assuming SettingsPage is imported and defined
             ),
           ],
         ),

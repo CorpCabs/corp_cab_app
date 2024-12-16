@@ -20,26 +20,34 @@ class OTPPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start, // Aligns text to the left
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              "Welcome,\n Raunak!",
-              textAlign: TextAlign.left,
+              "Welcome,\nRaunak", // Left-aligned Welcome text
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            const Text("Enter the OTP we've sent to your phone number."),
+            const Text(
+              "Enter the OTP we've sent to your phone number.",
+              style: TextStyle(fontSize: 16, color: Colors.grey),
+            ),
             const SizedBox(height: 20),
             TextFormField(
-              decoration: const InputDecoration(labelText: "OTP"),
+              decoration: const InputDecoration(
+                labelText: "OTP",
+                border: OutlineInputBorder(),
+              ),
               keyboardType: TextInputType.number,
             ),
             const SizedBox(height: 24),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                ),
                 onPressed: () {
                   context.pushNamed('home');
                 },

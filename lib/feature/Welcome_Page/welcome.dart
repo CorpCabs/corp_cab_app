@@ -1,5 +1,5 @@
 import 'package:corp_cab_app/core/extensions/context_extensions.dart';
-import 'package:corp_cab_app/feature/Home/view/home.dart';
+// import 'package:corp_cab_app/feature/Home/view/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -56,7 +56,7 @@ class WelcomePage extends StatelessWidget {
                 height: 48,
                 child: ElevatedButton(
                   onPressed: () {
-                    context.pushNamed('signup-page');
+                    context.pushNamed('login-page');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
@@ -65,7 +65,7 @@ class WelcomePage extends StatelessWidget {
                     ),
                   ),
                   child: const Text(
-                    'Sign up',
+                    'Log In',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -74,31 +74,31 @@ class WelcomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
-              // Log in button
-              SizedBox(
-                width: 200,
-                height: 48,
-                child: OutlinedButton(
-                  onPressed: () {
-                    context.pushNamed('login-page');
-                  },
-                  style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: Colors.black),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  child: const Text(
-                    'Log in',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
+              // const SizedBox(height: 16),
+              // // Log in button
+              // SizedBox(
+              //   width: 200,
+              //   height: 48,
+              //   child: OutlinedButton(
+              //     onPressed: () {
+              //       context.pushNamed('login-page');
+              //     },
+              //     style: OutlinedButton.styleFrom(
+              //       side: const BorderSide(color: Colors.black),
+              //       shape: RoundedRectangleBorder(
+              //         borderRadius: BorderRadius.circular(8),
+              //       ),
+              //     ),
+              //     child: const Text(
+              //       'Log in',
+              //       style: TextStyle(
+              //         color: Colors.black,
+              //         fontSize: 16,
+              //         fontWeight: FontWeight.bold,
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),
