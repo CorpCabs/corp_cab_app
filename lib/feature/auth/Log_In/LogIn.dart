@@ -41,6 +41,7 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 40),
               InternationalPhoneNumberInput(
                 onInputChanged: (number) {},
+                initialValue: PhoneNumber(isoCode: 'IN'),
                 selectorConfig: const SelectorConfig(
                   selectorType: PhoneInputSelectorType.DIALOG,
                 ),
