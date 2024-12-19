@@ -11,6 +11,7 @@ class LoginPage extends StatefulWidget {
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
+
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>(); // Form key for validation
   final TextEditingController _phoneController = TextEditingController();
@@ -19,78 +20,79 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.pop(context); // Back to previous page
-          },
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () {
+              Navigator.pop(context); // Back to previous page
+            },
+          ),
         ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Form(
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Form(
             key: _formKey,
             child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                "Hello!\nLog in to get started",
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 40),
-              InternationalPhoneNumberInput(
-                onInputChanged: (number) {},
-                initialValue: PhoneNumber(isoCode: 'IN'),
-                selectorConfig: const SelectorConfig(
-                  selectorType: PhoneInputSelectorType.DIALOG,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  "Hello!\nLog in to get started",
+                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                 ),
-                inputDecoration: const InputDecoration(labelText: "Phone Number"),
-                textFieldController: _phoneController, // Attach controller
+                const SizedBox(height: 40),
+                InternationalPhoneNumberInput(
+                    onInputChanged: (number) {},
+                    initialValue: PhoneNumber(isoCode: 'IN'),
+                    selectorConfig: const SelectorConfig(
+                      selectorType: PhoneInputSelectorType.DIALOG,
+                    ),
+                    inputDecoration:
+                        const InputDecoration(labelText: "Phone Number"),
+                    textFieldController: _phoneController, // Attach controller
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Phone number is required';
+                      } else if (!RegExp(r'^[0-9]{10}$').hasMatch(value)) {
+                        return 'Enter a valid 10-digit phone number';
+                      }
+                      return null;
+                    }),
+                const SizedBox(height: 12),
+                TextFormField(
+                  controller: _companyIDController,
+                  decoration: const InputDecoration(labelText: "Company ID"),
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Phone number is required';
-                    } else if (!RegExp(r'^[0-9]{10}$').hasMatch(value)) {
-                      return 'Enter a valid 10-digit phone number';
-                    }
-                    return null;
-                  }
-              ),
-              const SizedBox(height: 12),
-              TextFormField(
-                controller: _companyIDController,
-                decoration: const InputDecoration(labelText: "Company ID"),
-                validator: (value) {
                     if (value == null || value.trim().isEmpty) {
                       return 'Company ID is required';
                     }
                     return null;
                   },
                 ),
-              const SizedBox(height: 24),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      final phoneNumber = "+91${_phoneController.text.trim()}";
-                      FirebaseAuthMethods(FirebaseAuth.instance).phoneSignIn(
-                        context,
-                        phoneNumber,
-                      );
-                    }
-                  },
-                  child: const Text("Log in", style: TextStyle(fontSize: 16)),
+                const SizedBox(height: 24),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style:
+                        ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        final phoneNumber =
+                            "+91${_phoneController.text.replaceAll(' ', '').trim()}";
+                        FirebaseAuthMethods(FirebaseAuth.instance).phoneSignIn(
+                          context,
+                          phoneNumber,
+                        );
+                      }
+                    },
+                    child: const Text("Log in", style: TextStyle(fontSize: 16)),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      )
-    );
+        ));
   }
 }
