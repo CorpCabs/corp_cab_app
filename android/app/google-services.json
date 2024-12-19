@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "571226863812",
+    "project_id": "corpcab-auth",
+    "storage_bucket": "corpcab-auth.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:571226863812:android:4aa3164f2172a011833191",
+        "android_client_info": {
+          "package_name": "com.example.corp_cab_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWIboFS6cKCip3gjaQCHBOqQPBXOT_pM4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

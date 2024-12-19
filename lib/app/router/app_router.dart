@@ -35,7 +35,6 @@ import 'package:corp_cab_app/feature/Welcome_Page/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _sectionNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -63,7 +62,10 @@ final router = GoRouter(
         GoRoute(
           path: '/OTP-page',
           name: 'OTP-page',
-          builder: (context, state) => OTPPage(),
+          builder: (context, state) {
+            final verificationId = state.extra as String;
+            return OTPPage(verificationId: verificationId);
+          },
         ),
         GoRoute(
           path: '/signup-page',
@@ -134,7 +136,8 @@ final router = GoRouter(
           routes: <RouteBase>[
             GoRoute(
               path: '/setting',
-              builder: (context, state) => SettingsPage(),  // Assuming SettingsPage is imported and defined
+              builder: (context, state) =>
+                  SettingsPage(), // Assuming SettingsPage is imported and defined
             ),
           ],
         ),

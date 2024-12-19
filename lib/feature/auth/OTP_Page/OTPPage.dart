@@ -1,8 +1,18 @@
+import 'package:corp_cab_app/services/firebase_auth_methods.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class OTPPage extends StatelessWidget {
-  OTPPage({super.key});
+class OTPPage extends StatefulWidget {
+  final String verificationId;
+  const OTPPage({super.key, required this.verificationId});
+
+  @override
+  State<OTPPage> createState() => _OTPPageState();
+}
+
+class _OTPPageState extends State<OTPPage> {
+  final TextEditingController _otpController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +44,7 @@ class OTPPage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             TextFormField(
+              controller: _otpController,
               decoration: const InputDecoration(
                 labelText: "OTP",
                 border: OutlineInputBorder(),
@@ -49,7 +60,12 @@ class OTPPage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
                 onPressed: () {
-                  context.pushNamed('home');
+                  final userOTP = _otpController.text.trim();
+                  FirebaseAuthMethods(FirebaseAuth.instance).verifyOTP(
+                  context,
+                  widget.verificationId,
+                  userOTP,
+                  );
                 },
                 child: const Text("Verify", style: TextStyle(fontSize: 16)),
               ),

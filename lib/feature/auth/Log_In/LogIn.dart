@@ -1,3 +1,6 @@
+import 'package:corp_cab_app/feature/auth/OTP_Page/OTPPage.dart';
+import 'package:corp_cab_app/services/firebase_auth_methods.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
@@ -74,7 +77,11 @@ class _LoginPageState extends State<LoginPage> {
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      context.pushNamed('OTP-page');
+                      final phoneNumber = "+91${_phoneController.text.trim()}";
+                      FirebaseAuthMethods(FirebaseAuth.instance).phoneSignIn(
+                        context,
+                        phoneNumber,
+                      );
                     }
                   },
                   child: const Text("Log in", style: TextStyle(fontSize: 16)),
