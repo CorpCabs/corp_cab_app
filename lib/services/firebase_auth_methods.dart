@@ -64,7 +64,7 @@ class FirebaseAuthMethods {
       );
 
       // Navigate to the next screen, e.g., the home page
-      Navigator.pushNamed(context, 'home-page');
+      GoRouter.of(context).go('/home', extra: verificationId);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Failed to verify OTP: $e")),

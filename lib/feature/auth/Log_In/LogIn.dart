@@ -53,7 +53,8 @@ class _LoginPageState extends State<LoginPage> {
                         const InputDecoration(labelText: "Phone Number"),
                     textFieldController: _phoneController, // Attach controller
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
+                      final value = _phoneController.text.replaceAll(RegExp(r'\s+'), '');
+                      if (value.isEmpty) {
                         return 'Phone number is required';
                       } else if (!RegExp(r'^[0-9]{10}$').hasMatch(value)) {
                         return 'Enter a valid 10-digit phone number';
@@ -79,8 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                         ElevatedButton.styleFrom(backgroundColor: Colors.green),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        final phoneNumber =
-                            "+91${_phoneController.text.replaceAll(' ', '').trim()}";
+                        final phoneNumber = "+91${_phoneController.text.replaceAll(RegExp(r'\s+'), '').trim()}";
                         FirebaseAuthMethods(FirebaseAuth.instance).phoneSignIn(
                           context,
                           phoneNumber,
