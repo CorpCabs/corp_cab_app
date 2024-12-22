@@ -1,4 +1,3 @@
-import 'package:corp_cab_app/app/router/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -141,22 +140,22 @@ class RideDetailsPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                      minimumSize: const Size(double.infinity, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    onPressed: () {
-                      // Message Driver logic
-                    },
-                    child: const Text(
-                      'Message Driver',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                  ),
+                  // ElevatedButton(
+                  //   style: ElevatedButton.styleFrom(
+                  //     backgroundColor: Colors.green,
+                  //     minimumSize: const Size(double.infinity, 50),
+                  //     shape: RoundedRectangleBorder(
+                  //       borderRadius: BorderRadius.circular(10),
+                  //     ),
+                  //   ),
+                  //   onPressed: () {
+                  //     // Message Driver logic
+                  //   },
+                  //   child: const Text(
+                  //     'Message Driver',
+                  //     style: TextStyle(color: Colors.white, fontSize: 16),
+                  //   ),
+                  // ),
                 ],
               ),
             ),

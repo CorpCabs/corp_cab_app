@@ -11,6 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  shared_preferences: ^2.1.0  # Corrected placement
+
 
   # Localization
   flutter_localizations:
@@ -66,6 +68,10 @@ flutter:
     - assets/images/SUV.png
     - assets/images/profile.svg
     - assets/images/empty.svg
+    - assets/images/splash.svg
+    - assets/images/CorpCab-logo.svg
+    - assets/images/splash.png
+
 
   fonts:
     - family: Montserrat

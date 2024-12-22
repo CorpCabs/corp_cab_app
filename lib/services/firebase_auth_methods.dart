@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FirebaseAuthMethods {
   final FirebaseAuth _auth;
@@ -35,7 +36,6 @@ class FirebaseAuthMethods {
 
         // Navigate to OTP page with verificationId
         GoRouter.of(context).go('/auth/OTP-page', extra: verificationId);
-
       },
       codeAutoRetrievalTimeout: (String verificationId) {
         // Timeout for auto retrieval

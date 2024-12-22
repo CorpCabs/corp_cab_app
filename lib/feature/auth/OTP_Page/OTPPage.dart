@@ -1,7 +1,6 @@
 import 'package:corp_cab_app/services/firebase_auth_methods.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class OTPPage extends StatefulWidget {
   final String verificationId;
@@ -34,7 +33,7 @@ class _OTPPageState extends State<OTPPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              "Welcome,\nRaunak", // Left-aligned Welcome text
+              "Please enter your OTP.", // Left-aligned Welcome text
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),

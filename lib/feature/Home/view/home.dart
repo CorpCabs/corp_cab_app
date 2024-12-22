@@ -16,15 +16,26 @@ class HomePage extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 20),
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'GOOD DAY,\nRaunak',
-                  style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'GOOD DAY,\nRaunak',
+                      style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                ),
+                  IconButton(
+                    icon: const Icon(Icons.notifications_none, size: 28),
+                    onPressed: () {
+                      context.pushNamed('notifications'); // Replace with the notifications route
+                    },
+                  ),
+                ],
               ),
               const SizedBox(height: 40),
               Center(
