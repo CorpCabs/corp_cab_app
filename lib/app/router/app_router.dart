@@ -17,6 +17,7 @@
 // }
 
 import 'package:corp_cab_app/app/router/custom_route_observer.dart';
+import 'package:corp_cab_app/feature/Welcome_Page/welcome.dart';
 import 'package:corp_cab_app/feature/auth/Log_In/LogIn.dart';
 import 'package:corp_cab_app/feature/auth/OTP_Page/OTPPage.dart';
 // import 'package:corp_cab_app/feature/auth/Sign_Up/SignUp.dart';
@@ -49,7 +50,7 @@ final router = GoRouter(
     GoRoute(
       path: '/welcome',
       name: 'welcome',
-      builder: (context, state) => SplashScreen(),
+      builder: (context, state) => const WelcomePage(),
     ),
     GoRoute(
       path: '/auth',
