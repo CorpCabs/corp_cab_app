@@ -1,4 +1,5 @@
 import 'package:corp_cab_app/app/models/CabModel.dart';
+import 'package:corp_cab_app/app/models/DriverModel.dart';
 import 'package:corp_cab_app/app/repository/cab_bookimg_repository.dart';
 import 'package:flutter/material.dart';
 
@@ -11,11 +12,19 @@ class CabBookingProvider with ChangeNotifier {
   String _pickupLocation = '';
   String _dropOffLocation = '';
   String _selectedCabType = 'Standard';
-  final double _fare = 0;
+  double _fare = 0;
   bool _isLoading = false;
-  bool _isError = false;
-  DateTime _selectedDate = DateTime.now(); // Initialize with current date
-  TimeOfDay _selectedTime = TimeOfDay.now(); // Initialize with current time
+  final bool _isError = false;
+  DateTime _selectedDate = DateTime.now();
+  TimeOfDay _selectedTime = TimeOfDay.now();
+  int? _employeeId;
+  int? _companyId;
+  int? _designatedDriver;
+  List<Driver> _drivers = [];
+  bool _isFetchingDrivers = false;
+  bool _hasDriverFetchError = false;
+
+  // Static Vehicle Data
   final List<Vehicle> _vehicleData = [
     Vehicle(
       id: 1,
@@ -31,7 +40,7 @@ class CabBookingProvider with ChangeNotifier {
     ),
   ];
 
-  // Getters
+  // ✅ **Getters**
   String get pickupLocation => _pickupLocation;
   String get dropOffLocation => _dropOffLocation;
   String get selectedCabType => _selectedCabType;
@@ -40,10 +49,16 @@ class CabBookingProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get isError => _isError;
   int get selectedIndex => _selectedIndex ?? -1;
-  DateTime get selectedDate => _selectedDate; // Getter for selectedDate
-  TimeOfDay get selectedTime => _selectedTime; // Getter for selectedTime
+  DateTime get selectedDate => _selectedDate;
+  TimeOfDay get selectedTime => _selectedTime;
+  int? get employeeId => _employeeId;
+  int? get companyId => _companyId;
+  int? get designatedDriver => _designatedDriver;
+  List<Driver> get drivers => _drivers;
+  bool get isFetchingDrivers => _isFetchingDrivers;
+  bool get hasDriverFetchError => _hasDriverFetchError;
 
-  // Setters
+  // ✅ **Setters**
   void setPickupLocation(String location) {
     _pickupLocation = location;
     notifyListeners();
@@ -54,54 +69,29 @@ class CabBookingProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void setSelectedIndex(int index) {
+    _selectedIndex = index;
+    notifyListeners();
+  }
+
   void selectCabType(String cabType) {
     _selectedCabType = cabType;
     calculateFare();
     notifyListeners();
   }
 
-  Future<void> calculateFare() async {
-    try {
-      _isLoading = true;
-      notifyListeners();
-      // _fare = await _repository.calculateFare(_selectedCabType);
-    } catch (e) {
-      debugPrint('Error calculating fare: $e');
-    } finally {
-      _isLoading = false;
-      notifyListeners();
-    }
-  }
-
-  Future<String> bookCab() async {
-    try {
-      _isLoading = true;
-      notifyListeners();
-      return await _repository.bookCab(
-        _pickupLocation,
-        _dropOffLocation,
-        _selectedCabType,
-      );
-    } catch (e) {
-      return 'Error booking cab: $e';
-    } finally {
-      _isLoading = false;
-      notifyListeners();
-    }
-  }
-
-  void setLoading(bool value) {
-    _isLoading = value;
+  void setEmployeeId(int id) {
+    _employeeId = id;
     notifyListeners();
   }
 
-  void setError(bool value) {
-    _isError = value;
+  void setCompanyId(int id) {
+    _companyId = id;
     notifyListeners();
   }
 
-  void setSelectedIndex(int index) {
-    _selectedIndex = index;
+  void setDesignatedDriver(int? id) {
+    _designatedDriver = id;
     notifyListeners();
   }
 
@@ -113,5 +103,77 @@ class CabBookingProvider with ChangeNotifier {
   void setSelectedTime(TimeOfDay time) {
     _selectedTime = time;
     notifyListeners();
+  }
+
+  /// ✅ **Fetch Drivers from API**
+  Future<void> fetchDrivers() async {
+    try {
+      _isFetchingDrivers = true;
+      _hasDriverFetchError = false;
+      notifyListeners();
+
+      /// ✅ Fetch from API
+      final fetchedDrivers = await _repository.fetchDrivers();
+      _drivers = fetchedDrivers;
+
+      /// ✅ Automatically assign first driver
+      if (fetchedDrivers.isNotEmpty) {
+        setDesignatedDriver(fetchedDrivers.first.id);
+      }
+    } catch (e) {
+      _hasDriverFetchError = true;
+      debugPrint('Error fetching drivers: $e');
+    } finally {
+      _isFetchingDrivers = false;
+      notifyListeners();
+    }
+  }
+
+  /// ✅ Calculate the fare
+  Future<void> calculateFare() async {
+    try {
+      _isLoading = true;
+      notifyListeners();
+      _fare = await _repository.calculateFare(_selectedCabType);
+    } catch (e) {
+      debugPrint('Error calculating fare: $e');
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  /// ✅ Book a cab
+  Future<String> bookCab() async {
+    try {
+      _isLoading = true;
+      notifyListeners();
+
+      if (_pickupLocation.isEmpty || _dropOffLocation.isEmpty) {
+        return 'Pickup and Drop-off locations are required.';
+      }
+
+      if (_employeeId == null || _companyId == null) {
+        return 'Employee and Company are required.';
+      }
+
+      final bookingTime = '${_selectedTime.hour}:${_selectedTime.minute}';
+
+      return await _repository.bookCab(
+        pickup: _pickupLocation,
+        dropOff: _dropOffLocation,
+        cabType: _selectedCabType,
+        bookingDate: _selectedDate,
+        bookingTime: bookingTime,
+        employeeId: _employeeId!,
+        companyId: _companyId!,
+        designatedDriver: _designatedDriver,
+      );
+    } catch (e) {
+      return 'Error booking cab: $e';
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
   }
 }

@@ -37,9 +37,6 @@ Future<void> bootstrap({
             ChangeNotifierProvider<CabBookingProvider>(
               create: (_) => CabBookingProvider(cabRepositoryProvider),
             ),
-            ChangeNotifierProvider<DriverProvider>(
-              create: (_) => DriverProvider(),
-            ),
           ],
           child: await builder(),
         ),
