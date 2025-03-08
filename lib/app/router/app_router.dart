@@ -20,18 +20,15 @@ import 'package:corp_cab_app/app/router/custom_route_observer.dart';
 import 'package:corp_cab_app/feature/Welcome_Page/welcome.dart';
 import 'package:corp_cab_app/feature/auth/Log_In/LogIn.dart';
 import 'package:corp_cab_app/feature/auth/OTP_Page/OTPPage.dart';
-// import 'package:corp_cab_app/feature/auth/Sign_Up/SignUp.dart';
 import 'package:corp_cab_app/feature/activity/view/activity_page.dart';
 import 'package:corp_cab_app/feature/auth/Sign_Up/SignUp.dart';
 import 'package:corp_cab_app/feature/auth/index.dart';
-import 'package:corp_cab_app/feature/book_ride/bookride.dart';
 import 'package:corp_cab_app/feature/confirm/confirm.dart';
 import 'package:corp_cab_app/feature/index.dart';
 import 'package:corp_cab_app/feature/notifications/notifications.dart';
 import 'package:corp_cab_app/feature/ride_details/details.dart';
 import 'package:corp_cab_app/feature/schedule_ride/schedule_ride.dart';
 import 'package:corp_cab_app/feature/select_car/select_car.dart';
-import 'package:corp_cab_app/feature/splash_screen/splash.dart';
 
 // Create keys for `root` & `section` navigator avoiding unnecessary rebuilds
 import 'package:flutter/material.dart';
@@ -54,7 +51,7 @@ final router = GoRouter(
     ),
     GoRoute(
       path: '/auth',
-      builder: (context, state) => AuthPage(),
+      builder: (context, state) => const AuthPage(),
       routes: [
         GoRoute(
           path: '/login-page',
@@ -65,7 +62,7 @@ final router = GoRouter(
           path: '/OTP-page',
           name: 'OTP-page',
           builder: (context, state) {
-            final verificationId = state.extra as String;
+            final verificationId = state.extra! as String;
             return OTPPage(verificationId: verificationId);
           },
         ),
@@ -90,11 +87,6 @@ final router = GoRouter(
               name: 'home',
               builder: (context, state) => const HomePage(),
               routes: <RouteBase>[
-                GoRoute(
-                  path: '/book-ride',
-                  name: 'book-ride',
-                  builder: (context, state) => const BookRidePage(),
-                ),
                 GoRoute(
                   path: '/schedule-ride',
                   name: 'schedule-ride',
@@ -135,6 +127,13 @@ final router = GoRouter(
               path: '/activity',
               name: 'activity',
               builder: (context, state) => const ActivityPage(),
+              routes: [
+                GoRoute(
+                  path: '/ride-details',
+                  name: 'activity-ride-details',
+                  builder: (context, state) => const RideDetailsPage(),
+                ),
+              ],
             ),
           ],
         ),
@@ -144,7 +143,7 @@ final router = GoRouter(
             GoRoute(
               path: '/setting',
               builder: (context, state) =>
-                  SettingsPage(), // Assuming SettingsPage is imported and defined
+                  const SettingsPage(), // Assuming SettingsPage is imported and defined
             ),
           ],
         ),

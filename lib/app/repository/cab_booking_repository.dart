@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:corp_cab_app/app/models/DriverModel.dart';
+import 'package:corp_cab_app/app/models/booking_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 
@@ -47,14 +48,11 @@ class CabBookingRepository {
     required int companyId,
     int? designatedDriver,
   }) async {
-    const apiUrl = 'http://0.0.0.0:8000/api/booking/';
     final response = await http.post(
-      Uri.parse(apiUrl),
+      Uri.parse('$baseUrl/bookings/'),
       headers: {
         'accept': 'application/json',
         'Content-Type': 'application/json',
-        'X-CSRFTOKEN':
-            'dS9ksGppPsKkJYjjapmYEcA53HbzRjtOkbW9xLxE66wx0o8IZ8Mr3junvRU5iOIn',
       },
       body: jsonEncode({
         'booking_date':
@@ -73,6 +71,30 @@ class CabBookingRepository {
       return 'Cab booked successfully!';
     } else {
       throw Exception('Failed to book cab: ${response.body}');
+    }
+  }
+
+  Future<List<BookingModel>> fetchUpcomingBookings() async {
+    final response = await http.get(Uri.parse('$baseUrl/bookings/?employee=1&booking_status=PENDING'));
+
+    if (response.statusCode == 200) {
+      final data =
+          List<Map<String, dynamic>>.from(json.decode(response.body) as List);
+
+      return data.map(BookingModel.fromJson).toList();
+    } else {
+      throw Exception('Failed to fetch upcoming bookings');
+    }
+  }
+
+  Future<BookingModel> getBookingById(int bookingId) async {
+    final response = await http.get(Uri.parse('$baseUrl/bookings/$bookingId'));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body) as Map<String, dynamic>;
+      return BookingModel.fromJson(data);
+    } else {
+      throw Exception('Failed to fetch booking details');
     }
   }
 }

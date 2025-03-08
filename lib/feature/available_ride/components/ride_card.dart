@@ -1,8 +1,11 @@
+import 'package:corp_cab_app/app/providers/cab_booking_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 Widget rideCard({
   required BuildContext context,
+  required int driverId, 
   required String name,
   required double rating,
   required String dateTime,
@@ -46,6 +49,13 @@ Widget rideCard({
                     fontSize: 16,
                   ),
                 ),
+                Text(
+                  '⭐ $rating Rating',
+                  style: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 12,
+                  ),
+                ),
               ],
             ),
             const Spacer(),
@@ -53,6 +63,8 @@ Widget rideCard({
           ],
         ),
         const SizedBox(height: 12),
+
+
         Text(
           dateTime,
           style: const TextStyle(
@@ -61,6 +73,7 @@ Widget rideCard({
           ),
         ),
         const SizedBox(height: 8),
+
         Row(
           children: [
             const Icon(
@@ -69,7 +82,13 @@ Widget rideCard({
               size: 18,
             ),
             const SizedBox(width: 4),
-            Text(startLocation, style: const TextStyle(fontSize: 13)),
+            Expanded(
+              child: Text(
+                startLocation,
+                style: const TextStyle(fontSize: 13),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
           ],
         ),
         const Padding(
@@ -79,14 +98,22 @@ Widget rideCard({
             child: VerticalDivider(color: Colors.grey, thickness: 2),
           ),
         ),
+
         Row(
           children: [
             const Icon(Icons.location_on, color: Colors.black, size: 18),
             const SizedBox(width: 4),
-            Text(endLocation, style: const TextStyle(fontSize: 13)),
+            Expanded(
+              child: Text(
+                endLocation,
+                style: const TextStyle(fontSize: 13),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
           ],
         ),
         const SizedBox(height: 12),
+
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -105,41 +132,50 @@ Widget rideCard({
                 ),
               ],
             ),
-            // Column(
-            //   crossAxisAlignment: CrossAxisAlignment.end,
-            //   children: [
-            //     const Text(
-            //       "Ride Fare",
-            //       style: TextStyle(color: Colors.grey),
-            //     ),
-            //     Text(
-            //       fare,
-            //       style: const TextStyle(
-            //         fontWeight: FontWeight.bold,
-            //       ),
-            //     ),
-            //   ],
-            // ),
           ],
         ),
         const SizedBox(height: 12),
+
         SizedBox(
           width: double.infinity,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.green,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-              padding: const EdgeInsets.symmetric(vertical: 12),
-            ),
-            onPressed: () {
-              context.pushNamed('booking-confirm');
+          child: Consumer<CabBookingProvider>(
+            builder: (context, provider, child) {
+              return ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                ),
+                onPressed: provider.isLoading
+                    ? null
+                    : () async {
+                        provider.setDesignatedDriver(driverId);
+
+                        final result = await provider.bookCab();
+
+                        if (result.toLowerCase().contains('success')) {
+                          if (context.mounted) {
+                            await context.pushNamed('booking-confirm');
+                          }
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(result),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        }
+                      },
+                child: provider.isLoading
+                    ? const CircularProgressIndicator(color: Colors.white)
+                    : const Text(
+                        'Request Ride',
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      ),
+              );
             },
-            child: const Text(
-              'Request',
-              style: TextStyle(color: Colors.white, fontSize: 16),
-            ),
           ),
         ),
       ],

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:corp_cab_app/app/environment/app_environment.dart';
 import 'package:corp_cab_app/app/providers/cab_booking_provider.dart';
 import 'package:corp_cab_app/app/providers/driver_provider.dart';
-import 'package:corp_cab_app/app/repository/cab_bookimg_repository.dart';
+import 'package:corp_cab_app/app/repository/cab_booking_repository.dart';
 import 'package:corp_cab_app/core/utils/device_info/device_info_utils.dart';
 import 'package:corp_cab_app/core/utils/logger/logger_utils.dart';
 import 'package:corp_cab_app/core/utils/package_info/package_info_utils.dart';

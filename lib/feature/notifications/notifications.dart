@@ -35,7 +35,7 @@ class NotificationsScreen extends StatelessWidget {
               iconColor: Colors.green.shade200,
               icon: Icons.check_circle,
               onButtonPressed: () {
-                context.pushNamed('ride-details'); // Navigates to ride details
+                context.pushNamed('activity'); // Navigates to ride details
               },
             ),
             const SizedBox(height: 16),

@@ -68,6 +68,7 @@ class _DriverListPageState extends State<DriverListPage> {
               final driver = providerItem.drivers[index];
 
               return rideCard(
+                driverId: driver.id,
                 context: context,
                 name: '${driver.firstName} ${driver.lastName}',
                 rating: 4.2,

@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:corp_cab_app/app/models/CabModel.dart';
 import 'package:corp_cab_app/app/models/DriverModel.dart';
-import 'package:corp_cab_app/app/repository/cab_bookimg_repository.dart';
+import 'package:corp_cab_app/app/models/booking_model.dart';
+import 'package:corp_cab_app/app/repository/cab_booking_repository.dart';
 import 'package:flutter/material.dart';
 
 class CabBookingProvider with ChangeNotifier {
@@ -23,6 +26,10 @@ class CabBookingProvider with ChangeNotifier {
   List<Driver> _drivers = [];
   bool _isFetchingDrivers = false;
   bool _hasDriverFetchError = false;
+
+  List<BookingModel> _upcomingBookings = [];
+  bool _isLoadingUpcoming = false;
+  bool _hasUpcomingFetchError = false;
 
   // Static Vehicle Data
   final List<Vehicle> _vehicleData = [
@@ -57,6 +64,9 @@ class CabBookingProvider with ChangeNotifier {
   List<Driver> get drivers => _drivers;
   bool get isFetchingDrivers => _isFetchingDrivers;
   bool get hasDriverFetchError => _hasDriverFetchError;
+  List<BookingModel> get upcomingBookings => _upcomingBookings;
+  bool get isLoadingUpcoming => _isLoadingUpcoming;
+  bool get hasUpcomingFetchError => _hasUpcomingFetchError;
 
   // ✅ **Setters**
   void setPickupLocation(String location) {
@@ -105,18 +115,15 @@ class CabBookingProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  /// ✅ **Fetch Drivers from API**
   Future<void> fetchDrivers() async {
     try {
       _isFetchingDrivers = true;
       _hasDriverFetchError = false;
       notifyListeners();
 
-      /// ✅ Fetch from API
       final fetchedDrivers = await _repository.fetchDrivers();
       _drivers = fetchedDrivers;
 
-      /// ✅ Automatically assign first driver
       if (fetchedDrivers.isNotEmpty) {
         setDesignatedDriver(fetchedDrivers.first.id);
       }
@@ -129,7 +136,7 @@ class CabBookingProvider with ChangeNotifier {
     }
   }
 
-  /// ✅ Calculate the fare
+
   Future<void> calculateFare() async {
     try {
       _isLoading = true;
@@ -143,7 +150,7 @@ class CabBookingProvider with ChangeNotifier {
     }
   }
 
-  /// ✅ Book a cab
+
   Future<String> bookCab() async {
     try {
       _isLoading = true;
@@ -152,6 +159,10 @@ class CabBookingProvider with ChangeNotifier {
       if (_pickupLocation.isEmpty || _dropOffLocation.isEmpty) {
         return 'Pickup and Drop-off locations are required.';
       }
+
+      // TODO Temp for demo
+      _employeeId = 1;
+      _companyId = 1;
 
       if (_employeeId == null || _companyId == null) {
         return 'Employee and Company are required.';
@@ -175,5 +186,20 @@ class CabBookingProvider with ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     }
+  }
+
+  Future<void> fetchUpcomingBookings() async {
+    _isLoadingUpcoming = true;
+    _hasUpcomingFetchError = false;
+    notifyListeners();
+
+    try {
+      _upcomingBookings = await _repository.fetchUpcomingBookings();
+    } catch (error) {
+      _hasUpcomingFetchError = true;
+    }
+
+    _isLoadingUpcoming = false;
+    notifyListeners();
   }
 }

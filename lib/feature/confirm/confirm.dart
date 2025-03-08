@@ -13,11 +13,10 @@ class YourRidePage extends StatelessWidget {
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // Checkmark Icon
               Container(
-                padding: const EdgeInsets.all(12.0),
+                padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
@@ -45,7 +44,7 @@ class YourRidePage extends StatelessWidget {
               const SizedBox(height: 8),
               // Secondary message
               const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 32.0),
+                padding: EdgeInsets.symmetric(horizontal: 32),
                 child: Text(
                   'Happy Journey.',
                   style: TextStyle(
@@ -59,7 +58,7 @@ class YourRidePage extends StatelessWidget {
               // Green button
               ElevatedButton(
                 onPressed: () {
-                  context.pushNamed('ride-details');
+                  context.pushNamed('activity');
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
