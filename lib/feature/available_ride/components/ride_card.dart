@@ -1,3 +1,4 @@
+import 'package:corp_cab_app/app/common/toast.dart';
 import 'package:corp_cab_app/app/providers/cab_booking_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -5,7 +6,7 @@ import 'package:provider/provider.dart';
 
 Widget rideCard({
   required BuildContext context,
-  required int driverId, 
+  required int driverId,
   required String name,
   required double rating,
   required String dateTime,
@@ -63,8 +64,6 @@ Widget rideCard({
           ],
         ),
         const SizedBox(height: 12),
-
-
         Text(
           dateTime,
           style: const TextStyle(
@@ -73,7 +72,6 @@ Widget rideCard({
           ),
         ),
         const SizedBox(height: 8),
-
         Row(
           children: [
             const Icon(
@@ -98,7 +96,6 @@ Widget rideCard({
             child: VerticalDivider(color: Colors.grey, thickness: 2),
           ),
         ),
-
         Row(
           children: [
             const Icon(Icons.location_on, color: Colors.black, size: 18),
@@ -113,7 +110,6 @@ Widget rideCard({
           ],
         ),
         const SizedBox(height: 12),
-
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -135,7 +131,6 @@ Widget rideCard({
           ],
         ),
         const SizedBox(height: 12),
-
         SizedBox(
           width: double.infinity,
           child: Consumer<CabBookingProvider>(
@@ -160,12 +155,13 @@ Widget rideCard({
                             await context.pushNamed('booking-confirm');
                           }
                         } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(result),
-                              backgroundColor: Colors.red,
-                            ),
-                          );
+                          // ScaffoldMessenger.of(context).showSnackBar(
+                          //   SnackBar(
+                          //     content: Text(result),
+                          //     backgroundColor: Colors.red,
+                          //   ),
+                          // );
+                          ToastUtils.showErrorToast(result);
                         }
                       },
                 child: provider.isLoading

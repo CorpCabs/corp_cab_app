@@ -75,7 +75,8 @@ class CabBookingRepository {
   }
 
   Future<List<BookingModel>> fetchUpcomingBookings() async {
-    final response = await http.get(Uri.parse('$baseUrl/bookings/?employee=1&booking_status=PENDING'));
+    final response = await http
+        .get(Uri.parse('$baseUrl/bookings/?employee=1&booking_status=PENDING'));
 
     if (response.statusCode == 200) {
       final data =

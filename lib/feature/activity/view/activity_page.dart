@@ -28,7 +28,7 @@ class _MyRidesPageState extends State<ActivityPage>
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'My rides',
+          'My Rides',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
