@@ -1,6 +1,7 @@
-import 'package:corp_cab_app/app/providers/auth_provider.dart';
+import 'package:corp_cab_app/app/common/toast.dart';
+import 'package:corp_cab_app/app/resources/auth_methods.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 
 class OTPPage extends StatefulWidget {
   const OTPPage({super.key});
@@ -12,9 +13,38 @@ class OTPPage extends StatefulWidget {
 class _OTPPageState extends State<OTPPage> {
   final TextEditingController _otpController = TextEditingController();
 
+  bool _isLoading = false;
+
+  Future<void> verifyOTP(phoneNumber) async {
+    setState(() {
+      _isLoading = true;
+    });
+    final res = await AuthMethods().verifyOTP(
+      otp: _otpController.text.trim(),
+      phone: phoneNumber as String,
+    );
+    if (res == 'success') {
+      if (context.mounted) {
+        context.goNamed('home');
+
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    } else {
+      setState(() {
+        _isLoading = false;
+      });
+      if (context.mounted) {
+        // showSnackBar(context, res);
+        ToastUtils.showErrorToast(res);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final authProvider = Provider.of<AuthProvider>(context);
+    final phoneNumber = GoRouterState.of(context).extra as String?;
 
     return Scaffold(
       appBar: AppBar(
@@ -57,13 +87,13 @@ class _OTPPageState extends State<OTPPage> {
                   backgroundColor: Colors.green,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
-                onPressed: authProvider.isLoading
+                onPressed: _isLoading
                     ? null
                     : () {
                         final userOTP = _otpController.text.trim();
-                        authProvider.verifyOTP(userOTP);
+                        verifyOTP(phoneNumber);
                       },
-                child: authProvider.isLoading
+                child: _isLoading
                     ? const CircularProgressIndicator(color: Colors.white)
                     : const Text('Verify', style: TextStyle(fontSize: 16)),
               ),

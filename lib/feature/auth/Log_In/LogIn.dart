@@ -1,7 +1,8 @@
-import 'package:corp_cab_app/app/providers/auth_provider.dart';
+import 'package:corp_cab_app/app/common/toast.dart';
+import 'package:corp_cab_app/app/resources/auth_methods.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -14,11 +15,45 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _companyIDController = TextEditingController();
+  bool _isLoading = false;
+  @override
+  void dispose() {
+    super.dispose();
+    _phoneController.dispose();
+    _companyIDController.dispose();
+  }
+
+  Future<void> loginUser() async {
+    setState(() {
+      _isLoading = true;
+    });
+    final res = await AuthMethods().sendOTP(
+      phoneNumber: _phoneController.text.trim(),
+    );
+    if (res == 'success') {
+      if (context.mounted) {
+        context.pushNamed(
+          'login',
+          extra: _phoneController.text.trim(),
+        );
+
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    } else {
+      setState(() {
+        _isLoading = false;
+      });
+      if (context.mounted) {
+        // showSnackBar(context, res);
+        ToastUtils.showErrorToast(res);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    final authProvider = Provider.of<AuthProvider>(context);
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -77,16 +112,16 @@ class _LoginPageState extends State<LoginPage> {
                 child: ElevatedButton(
                   style:
                       ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                  onPressed: authProvider.isLoading
+                  onPressed: _isLoading
                       ? null
                       : () {
                           if (_formKey.currentState!.validate()) {
                             final phoneNumber =
                                 "+91${_phoneController.text.replaceAll(RegExp(r'\s+'), '').trim()}";
-                            authProvider.phoneSignIn(phoneNumber);
+                            loginUser();
                           }
                         },
-                  child: authProvider.isLoading
+                  child: _isLoading
                       ? const CircularProgressIndicator(color: Colors.white)
                       : const Text('Log in', style: TextStyle(fontSize: 16)),
                 ),

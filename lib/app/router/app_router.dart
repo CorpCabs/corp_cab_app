@@ -1,17 +1,9 @@
-import 'package:corp_cab_app/app/providers/auth_provider.dart';
-import 'package:corp_cab_app/app/router/custom_route_observer.dart';
+
 import 'package:corp_cab_app/feature/Welcome_Page/welcome.dart';
 import 'package:corp_cab_app/feature/auth/Log_In/LogIn.dart';
 import 'package:corp_cab_app/feature/auth/OTP_Page/OTPPage.dart';
-import 'package:corp_cab_app/feature/activity/view/activity_page.dart';
-import 'package:corp_cab_app/feature/auth/Sign_Up/SignUp.dart';
-import 'package:corp_cab_app/feature/auth/index.dart';
-import 'package:corp_cab_app/feature/confirm/confirm.dart';
 import 'package:corp_cab_app/feature/index.dart';
-import 'package:corp_cab_app/feature/notifications/notifications.dart';
-import 'package:corp_cab_app/feature/ride_details/details.dart';
-import 'package:corp_cab_app/feature/schedule_ride/schedule_ride.dart';
-import 'package:corp_cab_app/feature/select_car/select_car.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 // Create keys for `root` & `section` navigator avoiding unnecessary rebuilds
 import 'package:flutter/material.dart';
@@ -135,10 +127,9 @@ final _sectionNavigatorKey = GlobalKey<NavigatorState>();
 //   ],
 // );
 
-GoRouter getRouter(AuthProvider authProvider) {
+GoRouter getRouter(User? user) {
   return GoRouter(
-    initialLocation: authProvider.user != null ? '/home' : '/welcome',
-    refreshListenable: authProvider, // Listen for changes in auth state
+    initialLocation: user != null ? '/home' : '/welcome',
     routes: [
       GoRoute(
         path: '/welcome',
@@ -153,9 +144,7 @@ GoRouter getRouter(AuthProvider authProvider) {
       GoRoute(
         path: '/auth/OTP-page',
         name: 'OTP-page',
-        builder: (context, state) {
-          return const OTPPage();
-        },
+        builder: (context, state) => const OTPPage(),
       ),
       GoRoute(
         path: '/home',
@@ -164,7 +153,7 @@ GoRouter getRouter(AuthProvider authProvider) {
       ),
     ],
     redirect: (context, state) {
-      final isAuthenticated = authProvider.user != null;
+      final isAuthenticated = user != null;
       final isLoggingIn =
           state.fullPath == '/auth/login' || state.fullPath == '/auth/OTP-page';
 
