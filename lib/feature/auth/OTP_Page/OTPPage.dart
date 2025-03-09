@@ -1,10 +1,9 @@
-import 'package:corp_cab_app/services/firebase_auth_methods.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:corp_cab_app/app/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class OTPPage extends StatefulWidget {
-  final String verificationId;
-  const OTPPage({super.key, required this.verificationId});
+  const OTPPage({super.key});
 
   @override
   State<OTPPage> createState() => _OTPPageState();
@@ -15,25 +14,25 @@ class _OTPPageState extends State<OTPPage> {
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context);
+
     return Scaffold(
-       appBar: AppBar(
+      appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.pop(context); // Back to previous page
-          },
+          onPressed: () => Navigator.pop(context),
         ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start, // Aligns text to the left
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              "Please enter your OTP.", // Left-aligned Welcome text
+              'Please enter your OTP.',
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
@@ -45,7 +44,7 @@ class _OTPPageState extends State<OTPPage> {
             TextFormField(
               controller: _otpController,
               decoration: const InputDecoration(
-                labelText: "OTP",
+                labelText: 'OTP',
                 border: OutlineInputBorder(),
               ),
               keyboardType: TextInputType.number,
@@ -58,15 +57,15 @@ class _OTPPageState extends State<OTPPage> {
                   backgroundColor: Colors.green,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
-                onPressed: () {
-                  final userOTP = _otpController.text.trim();
-                  FirebaseAuthMethods(FirebaseAuth.instance).verifyOTP(
-                  context,
-                  widget.verificationId,
-                  userOTP,
-                  );
-                },
-                child: const Text("Verify", style: TextStyle(fontSize: 16)),
+                onPressed: authProvider.isLoading
+                    ? null
+                    : () {
+                        final userOTP = _otpController.text.trim();
+                        authProvider.verifyOTP(userOTP);
+                      },
+                child: authProvider.isLoading
+                    ? const CircularProgressIndicator(color: Colors.white)
+                    : const Text('Verify', style: TextStyle(fontSize: 16)),
               ),
             ),
           ],

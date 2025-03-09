@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 Future<void> main() async {
   await bootstrap(builder: App.new, environment: DevelopmentEnvironment());
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

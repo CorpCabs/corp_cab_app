@@ -56,7 +56,7 @@ class WelcomePage extends StatelessWidget {
                 height: 48,
                 child: ElevatedButton(
                   onPressed: () {
-                    context.pushNamed('login-page');
+                    context.pushNamed('login');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,

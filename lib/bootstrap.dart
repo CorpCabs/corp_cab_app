@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:corp_cab_app/app/environment/app_environment.dart';
+import 'package:corp_cab_app/app/providers/auth_provider.dart';
 import 'package:corp_cab_app/app/providers/cab_booking_provider.dart';
 import 'package:corp_cab_app/app/providers/driver_provider.dart';
 import 'package:corp_cab_app/app/repository/cab_booking_repository.dart';
@@ -34,6 +35,9 @@ Future<void> bootstrap({
       runApp(
         MultiProvider(
           providers: [
+            ChangeNotifierProvider<AuthProvider>(
+              create: (_) => AuthProvider(),
+            ),
             ChangeNotifierProvider<CabBookingProvider>(
               create: (_) => CabBookingProvider(cabRepositoryProvider),
             ),
