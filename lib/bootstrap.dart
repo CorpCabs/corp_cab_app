@@ -8,7 +8,9 @@ import 'package:corp_cab_app/app/repository/cab_booking_repository.dart';
 import 'package:corp_cab_app/core/utils/device_info/device_info_utils.dart';
 import 'package:corp_cab_app/core/utils/logger/logger_utils.dart';
 import 'package:corp_cab_app/core/utils/package_info/package_info_utils.dart';
+import 'package:corp_cab_app/firebase_options.dart';
 import 'package:corp_cab_app/locator.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +25,11 @@ Future<void> bootstrap({
   await runZonedGuarded<Future<void>>(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
+      WidgetsFlutterBinding.ensureInitialized();
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+
       // Initialize Locator and Utils
       await Future.wait([
         // Locator.locateServices(environment: environment),

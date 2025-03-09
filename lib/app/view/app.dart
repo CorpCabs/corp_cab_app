@@ -33,6 +33,13 @@ import 'package:fluttertoast/fluttertoast.dart';
 //   }
 // }
 
+import 'package:corp_cab_app/app/constants/string_constants.dart';
+import 'package:corp_cab_app/app/l10n/l10n.dart';
+import 'package:corp_cab_app/app/providers/auth_provider.dart';
+import 'package:corp_cab_app/app/router/app_router.dart' as app_router;
+import 'package:corp_cab_app/app/theme/light/light_theme.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {
@@ -40,17 +47,30 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AuthProvider>(
-      builder: (context, authProvider, child) {
-        return MaterialApp.router(
-          title: 'CorpCab App',
-          theme: LightTheme().theme,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          routerConfig: app_router.getRouter(authProvider),
-          builder: FToastBuilder(),
-        );
-      },
+    return MultiProvider(
+      providers: [  
+        ChangeNotifierProvider<AuthProvider>(
+          create: (context) => AuthProvider(),
+        ),
+        // Add more providers here as needed
+        // ChangeNotifierProvider<AnotherProvider>(
+        //   create: (context) => AnotherProvider(),
+        // ),
+      ],
+      child: Builder(
+        builder: (context) {
+          final authProvider =
+              Provider.of<AuthProvider>(context, listen: false);
+          return MaterialApp.router(
+            title: StringConstants.appName,
+            theme: LightTheme().theme,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            routerConfig: app_router.getRouter(authProvider),
+            builder: FToastBuilder(),
+          );
+        },
+      ),
     );
   }
 }
