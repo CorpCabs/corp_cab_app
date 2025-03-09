@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:571226863812:android:4aa3164f2172a011833191",
+        "mobilesdk_app_id": "1:571226863812:android:1be1da4cb36510c0833191",
         "android_client_info": {
-          "package_name": "com.example.corp_cab_app"
+          "package_name": "com.corpcab.app"
         }
       },
       "oauth_client": [],

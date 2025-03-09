@@ -1,4 +1,4 @@
-package com.example.corp_cab_app
+package com.corpcab.app
 
 import io.flutter.embedding.android.FlutterActivity
 
